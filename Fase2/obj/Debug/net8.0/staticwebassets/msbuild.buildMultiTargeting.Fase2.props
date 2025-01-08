@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/Fase2.props" />
+</Project>

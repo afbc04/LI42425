@@ -1,0 +1,41 @@
+{
+  "Files": [
+    {
+      "Id": "/home/andre/Desktop/LI42425/Fase2/obj/Debug/net8.0/scopedcss/projectbundle/Fase2.bundle.scp.css",
+      "PackagePath": "staticwebassets/Fase2.bundle.scp.css"
+    },
+    {
+      "Id": "/home/andre/Desktop/LI42425/Fase2/wwwroot/app.css",
+      "PackagePath": "staticwebassets/app.css"
+    },
+    {
+      "Id": "/home/andre/Desktop/LI42425/Fase2/wwwroot/bootstrap/bootstrap.min.css",
+      "PackagePath": "staticwebassets/bootstrap/bootstrap.min.css"
+    },
+    {
+      "Id": "/home/andre/Desktop/LI42425/Fase2/wwwroot/bootstrap/bootstrap.min.css.map",
+      "PackagePath": "staticwebassets/bootstrap/bootstrap.min.css.map"
+    },
+    {
+      "Id": "/home/andre/Desktop/LI42425/Fase2/wwwroot/favicon.png",
+      "PackagePath": "staticwebassets/favicon.png"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.Fase2.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.build.Fase2.props",
+      "PackagePath": "build\\Fase2.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.Fase2.props",
+      "PackagePath": "buildMultiTargeting\\Fase2.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.Fase2.props",
+      "PackagePath": "buildTransitive\\Fase2.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
