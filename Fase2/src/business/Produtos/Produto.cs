@@ -1,3 +1,5 @@
+using System.Collections;
+
 namespace Produtos {
 
     public class Produto {
@@ -6,6 +8,8 @@ namespace Produtos {
         public string? Descricao {get; set;}
         public string Nome {get; set;}
 
+        private IList<string> _procedimentos;
+
         //TODO: adicionar materiais
 
         Produto(string nome, float preco) {
@@ -13,6 +17,7 @@ namespace Produtos {
             this.Nome = nome;
             this.Preco = preco;
             this.Descricao = null;
+            _procedimentos = new List<string>();
 
         }
 

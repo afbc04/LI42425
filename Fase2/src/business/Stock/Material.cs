@@ -3,7 +3,20 @@ namespace Materiais {
     public class Material {
 
         public string Tipo {get; set;}
-        public int Quantidade {get; set;}
+        private int _quantidade;
+        public int Quantidade {
+            get {
+            return _quantidade;
+            } 
+            set {
+
+            if (value <= 0)
+                _quantidade = 0;
+            else
+                Quantidade = value;
+                
+            }
+        }
 
         public Material(string tipo, int quantidade) {
             Tipo = tipo;

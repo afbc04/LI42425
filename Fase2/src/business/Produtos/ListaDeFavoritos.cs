@@ -31,7 +31,7 @@ namespace Produtos {
             }
         }
 
-        ListaDeFavoritos() {
+        public ListaDeFavoritos() {
 
             _produtos = new HashSet<Produto>();
 
