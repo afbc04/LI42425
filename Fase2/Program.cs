@@ -1,5 +1,8 @@
 using Fase2.Components;
+using ui;
+using business;
 
+/*
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -24,4 +27,24 @@ app.UseAntiforgery();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
-app.Run();
+app.Run();*/
+
+
+namespace CantinhoDasEncomendas {
+
+    public class CantinhoDasEncomendas {
+
+        public static void Main(string[] args) {
+            try {
+                Console.WriteLine("Iniciar");
+                new TextUI().Run();
+                Console.WriteLine("Fim");
+            }
+            catch (Exception e) {
+                Console.WriteLine($"Erro fatal: {e.Message} [{e.ToString}]");
+            }
+        }
+
+    }
+
+}
