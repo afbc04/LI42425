@@ -1,23 +1,20 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
-
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
-        </div>
-
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>
-
-<div id="blazor-error-ui">
-    An unhandled error has occurred.
-    <a href="" class="reload">Reload</a>
-    <a class="dismiss">🗙</a>
-</div>
+<nav class="menu-h">
+    <ul>
+        <!-- Logotipo -->
+        <li class="logo-item">
+            <img src="logo.png" alt="Cantinho da Doçura" class="logo-img">
+        </li>
+        <!-- Links do Menu -->
+        <li><a href="/">Início</a></li>
+        <li><a href="#">Favoritos</a></li>
+        <li><a href="/areaPessoal">Área Pessoal</a></li>
+        <li><a href="#">Carrinho de Compras</a></li>
+        <li><a href="#">Avaliações</a></li>
+        <li><a href="/faq">FAQ</a></li>
+    </ul>
+</nav>
+<main>
+    @Body <!-- contúdo específico da página -->
+</main>
