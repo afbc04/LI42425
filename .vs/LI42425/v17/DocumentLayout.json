@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\beatr\\source\\repos\\LI42425\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{2CAFB96E-5679-4A40-9974-01E07955192F}|Fase2\\Fase2.csproj|c:\\users\\beatr\\source\\repos\\li42425\\fase2\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{2CAFB96E-5679-4A40-9974-01E07955192F}|Fase2\\Fase2.csproj|solutionrelative:fase2\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{2CAFB96E-5679-4A40-9974-01E07955192F}|Fase2\\Fase2.csproj|c:\\users\\beatr\\source\\repos\\li42425\\fase2\\features\\autentica\u00E7\u00E3o\\registo.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{2CAFB96E-5679-4A40-9974-01E07955192F}|Fase2\\Fase2.csproj|solutionrelative:fase2\\features\\autentica\u00E7\u00E3o\\registo.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -27,19 +31,32 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": ".gitignore",
+              "DocumentMoniker": "C:\\Users\\beatr\\source\\repos\\LI42425\\Fase2\\.gitignore",
+              "RelativeDocumentMoniker": "Fase2\\.gitignore",
+              "ToolTip": "C:\\Users\\beatr\\source\\repos\\LI42425\\Fase2\\.gitignore",
+              "RelativeToolTip": "Fase2\\.gitignore",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-01-23T11:43:05.58Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "Registo.razor",
               "DocumentMoniker": "C:\\Users\\beatr\\source\\repos\\LI42425\\Fase2\\Features\\Autentica\u00E7\u00E3o\\Registo.razor",
               "RelativeDocumentMoniker": "Fase2\\Features\\Autentica\u00E7\u00E3o\\Registo.razor",
               "ToolTip": "C:\\Users\\beatr\\source\\repos\\LI42425\\Fase2\\Features\\Autentica\u00E7\u00E3o\\Registo.razor",
               "RelativeToolTip": "Fase2\\Features\\Autentica\u00E7\u00E3o\\Registo.razor",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-01-23T11:35:12.542Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Login.razor",
               "DocumentMoniker": "C:\\Users\\beatr\\source\\repos\\LI42425\\Fase2\\Features\\Autentica\u00E7\u00E3o\\Login.razor",
               "RelativeDocumentMoniker": "Fase2\\Features\\Autentica\u00E7\u00E3o\\Login.razor",
@@ -51,7 +68,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "RecuperacaoPassword.razor",
               "DocumentMoniker": "C:\\Users\\beatr\\source\\repos\\LI42425\\Fase2\\Features\\Autentica\u00E7\u00E3o\\RecuperacaoPassword.razor",
               "RelativeDocumentMoniker": "Fase2\\Features\\Autentica\u00E7\u00E3o\\RecuperacaoPassword.razor",
