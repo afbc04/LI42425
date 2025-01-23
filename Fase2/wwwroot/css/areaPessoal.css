@@ -1,0 +1,63 @@
+﻿
+/* Container dos botões */
+.botao-container {
+    display: flex;
+    flex-direction: column; /* Organiza os botões em coluna */
+    align-items: center; /* Centraliza os botões horizontalmente */
+    margin: 0 auto;
+    max-width: 300px; /* Largura máxima */
+    background-color: #fff;
+}
+
+/* Estilo dos botões */
+.botao {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    text-align: center;
+    color: #333;
+    text-decoration: none;
+    padding: 10px 15px;
+    margin: 5px 0; /* Espaço entre os botões */
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    box-sizing: border-box; /*para garantir que 
+    o tamanho não fique maior que o container pai (botao-container)
+    */
+    width: 100% /*ocupar toda a largura*/
+}
+
+    .botao:hover {
+        background-color: #e0e0e0;
+    }
+
+.botao-container .a-criar-login {
+    color: #007bff;
+    text-decoration: none;
+}
+
+    .botao-container .a-criar-login:hover {
+        text-decoration: underline;
+    }
+
+.user {
+    width: 100%;
+    height: 250px;
+    margin: 0 auto 10px auto;
+    border: 1px solid #000; /* Adiciona uma borda preta */
+    display: flex;
+    justify-content: center; /* Alinha horizontalmente o conteúdo */
+    align-items: center; /* Alinha verticalmente o conteúdo */
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.botao-container img {
+    width: 250px;
+    height: 250px;
+}
+
+
+h2 {
+    margin-bottom: 10px; /* Espaço abaixo do título */
+    margin-top: 30px;
+}
