@@ -1,0 +1,341 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /*define a altura da janela do browser*/
+    box-sizing: border-box; /* Inclui padding e border no cálculo do tamanho */
+}
+
+body.pagina-inicial {
+    display: block;
+}
+
+/* Estilos para o menu */
+.menu-h { /* Mudando de #menu-h para .menu-h */
+    list-style-type: none; /* Remove os pontos da lista */
+    padding: 0;
+    background-color: #989696; /* Cor de fundo do menu */
+    width: 100%; /* Ocupa toda a largura da tela */
+    z-index: 1000; /* Garante que o menu fique acima de outros elementos */
+    top: 0;
+    position: fixed; /* Fixa o menu no topo */
+    display: flex;
+    justify-content: space-between; /* Alinha logo à esquerda e links à direita */
+    align-items: center; /* Alinha os itens do menu verticalmente */
+}
+
+.menu-h ul {
+    display: flex; /* Exibe os itens em linha */
+    margin: 0;
+    padding: 0;
+}
+
+    .menu-h ul li {
+        display: inline; /* Itens do menu ao lado um do outro */
+    }
+
+        .menu-h ul li a {
+            color: white; /* Cor do texto dos links */
+            text-decoration: none; /* Remove o sublinhado dos links */
+            padding: 20px;
+            font-size: 16px;
+            display: inline-block;
+            transition: background .4s;
+        }
+
+            .menu-h ul li a:hover {
+                background-color: #F2D8E6; /* Efeito de fundo quando o cursor passa sobre o link */
+            }
+
+.logo-item {
+    margin-right: auto; /* Alinha o logo à esquerda */
+}
+
+.logo-img {
+    height: 58px; /* Mesma altura do menu */
+    width: auto; /* Mantém a proporção da imagem */
+    display: block; /* Garante que a imagem seja tratada como um bloco */
+}
+
+.container {
+    text-align: center; /* Centraliza o texto dentro do container */
+    background: #ffffff;
+    padding: 20px 40px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 400px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra suave */
+    box-sizing: border-box; /* Garante que o tamanho não ultrapassa os limites */
+}
+
+.logo {
+    width: 302px;
+    height: 250px;
+    margin: 0 auto 20px auto;
+    border: 1px solid #000; /* Adiciona uma borda preta */
+    display: flex;
+    justify-content: center; /* Alinha horizontalmente o conteúdo */
+    align-items: center; /* Alinha verticalmente o conteúdo */
+    font-size: 18px;
+    font-weight: bold;
+}
+
+h2 {
+    margin-bottom: 20px; /* Espaço abaixo do título */
+}
+
+form input {
+    display: block;
+    padding: 10px;
+    width: 302px;
+    margin: 0 auto 10px auto; /* Centraliza os inputs dentro do container */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #e6e6e6;
+    box-sizing: border-box; /* Garante que padding não ultrapassa a largura */
+}
+
+form button {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    width: 302px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto; /* Centraliza o botão dentro do container */
+}
+
+    form button:hover {
+        background-color: #333;
+    }
+
+.container p {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+    .container p a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+        .container p a:hover {
+            text-decoration: underline;
+        }
+
+.titulo-menu {
+    font-family: 'Dancing Script', cursive;
+    font-size: 36px;
+    font-weight: bold;
+    color: #D97971;
+    margin: 80px auto 20px;
+    text-align: center;
+}
+
+.subtitulo-menu {
+    font-family: 'Dancing Script', cursive;
+    font-size: 25px;
+    font-weight: bold;
+    color: rgba(217, 121, 113, 0.6);
+    margin: 30px auto 40px;
+    text-align: center;
+}
+
+.menu-tartes {
+    display: grid;
+    background-color: white;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px; /*Espaçamento entre os itens */
+    padding: 5px;
+    max-width: 800px; /* Largura máxima do grid */
+    margin: 0 auto 20px; /* Centraliza o grid */
+}
+
+/* Estilo base para as tartes */
+.tarte {
+    background-color: white;
+    border: 2px dashed #D97971;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer; /* Indica que é clicável */
+    transition: transform 0.3s, box-shadow 0.3s;
+    font-size: 15px;
+    font-weight: bold;
+    font-family: 'Dancing Script', cursive;
+    color: #D97971;
+    text-decoration: none;
+}
+
+    .tarte img {
+        height: 150px;
+        border-radius: 5px; /* Borda arredondada da imagem */
+        margin-top: 10px
+    }
+
+.tarte-detalhes {
+    display: block; /*permite que os elementos sejam empilhados verticalmente*/
+    margin: 100px auto; /* Centraliza o conteúdo horizontalmente */
+    max-width: 600px; /* Define a largura máxima da área de detalhes */
+    padding: 20px;
+    background-color: #fff; /* Fundo branco */
+    border: 2px dashed #D97971;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra leve */
+}
+
+    .tarte-detalhes h1 {
+        font-family: 'Dancing Script', cursive; /* Letra elegante */
+        font-size: 20px; /* Tamanho grande */
+        color: #D97971; /* Cor de destaque */
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    .tarte-detalhes img {
+        display: block;
+        margin: 0 auto 20px; /* Espaço em volta */
+        height: 150px;
+        border-radius: 10px; /* Borda arredondada */
+    }
+        .tartes-detalhes p {
+            font-family: 'Arial', sans-serif;
+            font-size: 1rem;
+            color: #555; /* Texto cinzento */
+            line-height: 1.6; /* Boa legibilidade */
+            text-align: left;
+        }
+/* Estilos específicos para o preço */
+
+        .tarte-detalhes .preco {
+            font-family: 'Arial', sans-serif;
+            font-size: 1rem; /* Tamanho maior para o preço */
+            color: #555; /* Cor do preço */
+            text-align: center; /* Alinha o preço à direita */
+            margin-top: 5px; /*Espaço superior para o preço */
+        }
+
+.tarte-detalhes .a-voltarMenu {
+    color: #007bff; /* Cor do texto dos links */
+    text-decoration: none; /* Remove o sublinhado dos links */
+    font-size: 16px;
+    text-align: center;
+    display: block;
+}
+    .tarte-detalhes .a-voltarMenu:hover{
+       text-decoration: underline;
+    }
+
+/* Container dos botões */
+.botao-container {
+    display: flex;
+    flex-direction: column; /* Organiza os botões em coluna */
+    align-items: center; /* Centraliza os botões horizontalmente */
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 300px; /* Largura máxima */
+    background-color: #fff;
+}
+
+/* Estilo dos botões */
+.botao {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    text-align: center;
+    color: #333;
+    text-decoration: none;
+    padding: 10px 15px;
+    margin: 5px 0; /* Espaço entre os botões */
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    box-sizing: border-box; /*para garantir que 
+    o tamanho não fique maior que o container pai (botao-container)
+    */
+    width: 100%
+}
+
+    .botao:hover {
+        background-color: #e0e0e0;
+    }
+
+.botao-container .a-criar-login {
+    color: #007bff;
+    text-decoration: none;
+}
+    .botao-container .a-criar-login:hover{
+        text-decoration:underline;
+    }
+
+.user {
+    width: 302px;
+    height: 250px;
+    margin: 0 auto 10px auto;
+    border: 1px solid #000; /* Adiciona uma borda preta */
+    display: flex;
+    justify-content: center; /* Alinha horizontalmente o conteúdo */
+    align-items: center; /* Alinha verticalmente o conteúdo */
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.faq-container {
+    margin-top: 80px; /* Espaço para o menu fixo */
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #fff;
+}
+
+    .faq-container h2 {
+        text-align: center;
+        font-family: 'Arial', sans-serif;
+        font-size: 32px;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+.faq-item {
+    margin-bottom: 15px;
+}
+
+.faq-question {
+    font-size: 18px;
+    font-weight: bold;
+    color: #D97971;
+}
+
+.faq-answer {
+    font-size: 16px;
+    color: #555;
+    margin-top: 5px;
+    line-height: 1.6;
+}
+
+.botao-carrinho {
+    color: #333; /* Cor do texto dos links */
+    text-decoration: none; /* Remove o sublinhado dos links */
+    font-size: 16px;
+    text-align: center;
+    display: block;
+    background-color: #e0e0e0;
+    padding: 5px 5px;
+    margin: 0 0 10px;
+}
+
+    .botao-carrinho:hover {
+        background-color: #f9f9f9;
+    }
+
+/*
+margin: auto -> cria um espaço igual à esquerda e à direita do elemento, 
+centralizando-o horizontalmente dentro do container
+Controla o espaçamento externo
+
+border-box -> permite especificar o tamanho total do elemento
+incluindo a largura definida, o padding e a borda. Garante que 
+o tamanho total de um elemento nunca ultrapasse os valores de width
+*/
