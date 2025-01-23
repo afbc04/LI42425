@@ -1,0 +1,48 @@
+﻿.titulo-menu {
+    font-family: 'Dancing Script', cursive;
+    font-size: 36px;
+    font-weight: bold;
+    color: #D97971;
+    margin: 40px auto 20px;
+    text-align: center;
+}
+
+.subtitulo-menu {
+    font-family: 'Dancing Script', cursive;
+    font-size: 25px;
+    font-weight: bold;
+    color: rgba(217, 121, 113, 0.6);
+    margin: 30px auto 40px;
+    text-align: center;
+}
+
+.menu-tartes {
+    display: grid;
+    background-color: white;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px; /*Espaçamento entre os itens */
+    padding: 5px;
+    max-width: 800px; /* Largura máxima do grid */
+    margin: 0 auto 20px; /* Centraliza o grid */
+}
+
+/* Estilo base para as tartes */
+.tarte {
+    background-color: white;
+    border: 2px dashed #D97971;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer; /* Indica que é clicável */
+    transition: transform 0.3s, box-shadow 0.3s;
+    font-size: 15px;
+    font-weight: bold;
+    font-family: 'Dancing Script', cursive;
+    color: #D97971;
+    text-decoration: none;
+}
+
+    .tarte img {
+        height: 150px;
+        border-radius: 5px; /* Borda arredondada da imagem */
+        margin-top: 10px
+    }

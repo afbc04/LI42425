@@ -1,0 +1,69 @@
+﻿.tarte-detalhes {
+    display: block; /*permite que os elementos sejam empilhados verticalmente*/
+    margin: 100px auto; /* Centraliza o conteúdo horizontalmente */
+    max-width: 600px; /* Define a largura máxima da área de detalhes */
+    padding: 50px;
+    background-color: #fff; /* Fundo branco */
+    border: 2px dashed #D97971;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra leve */
+}
+
+    .tarte-detalhes h1 {
+        font-family: 'Dancing Script', cursive; /* Letra elegante */
+        font-size: 20px; /* Tamanho grande */
+        color: #D97971; /* Cor de destaque */
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .tarte-detalhes img {
+        display: block;
+        margin: 0 auto 20px; /* Espaço em volta */
+        height: 150px;
+        border-radius: 10px; /* Borda arredondada */
+    }
+
+.tartes-detalhes p {
+    font-family: 'Arial', sans-serif;
+    font-size: 1rem;
+    color: #555; /* Texto cinzento */
+    line-height: 1.6; /* Boa legibilidade */
+    text-align: left;
+}
+/* Estilos específicos para o preço */
+
+.tarte-detalhes .preco {
+    font-family: 'Arial', sans-serif;
+    font-size: 1rem; /* Tamanho maior para o preço */
+    color: #555; /* Cor do preço */
+    text-align: center; /* Alinha o preço à direita */
+    margin-top: 5px; /*Espaço superior para o preço */
+}
+
+.tarte-detalhes .a-voltarMenu {
+    color: #007bff; /* Cor do texto dos links */
+    text-decoration: none; /* Remove o sublinhado dos links */
+    font-size: 16px;
+    text-align: center;
+    display: block;
+    margin-top: 15px;
+}
+
+    .tarte-detalhes .a-voltarMenu:hover {
+        text-decoration: underline;
+    }
+
+.botao-carrinho {
+    color: #333; /* Cor do texto dos links */
+    text-decoration: none; /* Remove o sublinhado dos links */
+    font-size: 16px;
+    text-align: center;
+    display: block;
+    background-color: #e0e0e0;
+    padding: 5px 10px;
+    margin: auto;
+}
+
+    .botao-carrinho:hover {
+        background-color: #f9f9f9;
+    }

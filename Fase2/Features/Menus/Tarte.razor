@@ -1,0 +1,86 @@
+﻿@page "/tarte/{NomeTarte}"
+@inherits LayoutComponentBase
+@layout Layout.MainLayout
+
+<head>
+    <link href="tarte.css" rel="stylesheet" />
+</head>
+
+@code {
+    [Parameter]
+    public string NomeTarte { get; set; } = string.Empty; // String.Empty permite garantir que caso o parameetro não seja passado, tanha um valor padrão
+
+    private string Titulo { get; set; } = string.Empty;
+    private string Imagem { get; set; } = string.Empty;
+    private string Preco { get; set; } = string.Empty;
+    private string Descricao { get; set; } = string.Empty;
+
+    protected override void OnParametersSet()
+    {
+        // Configura os detalhes da tarte com base no NomeTarte
+        switch (NomeTarte.ToLower())
+        {
+            case "maca":
+                Titulo = "Tarte de Maçã";
+                Imagem = "tarte_maca.png";
+                Preco = "8.00€";
+                Descricao = "Uma deliciosa tarte de maçã com um toque de canela e crocância.";
+                break;
+
+            case "rosas":
+                Titulo = "Tarte Rosas";
+                Imagem = "tarte_rosa.png";
+                Preco = "7.00€";
+                Descricao = "Fatias finas de fruta moldadas em rosas, com recheio cremoso.";
+                break;
+
+            case "mirtilo":
+                Titulo = "Tarte de Mirtilo";
+                Imagem = "tarte_mirtilo.png";
+                Preco = "8.50€";
+                Descricao = "Uma combinação perfeita de doçura e acidez, ideal para qualquer refeição.";
+                break;
+
+            case "framboesa":
+                Titulo = "Tarte de Framboesa";
+                Imagem = "tarte_framboesa.png";
+                Preco = "8.00€";
+                Descricao = "Explosão deliciosa de sabores, ainda melhor com uma bola de gelado.";
+                break;
+
+            case "chocolate":
+                Titulo = "Tarte de Chocolate";
+                Imagem = "tarte_chocolate.png";
+                Preco = "9.00€";
+                Descricao = "Creme de chocolate com flor de sal e frutos secos para uma crocância perfeita.";
+                break;
+
+            case "mandala":
+                Titulo = "Tarte Mandala";
+                Imagem = "tarte_mandala.png";
+                Preco = "8.00€";
+                Descricao = "Uma combinação de sabores com um belo desenho primaveril no topo.";
+                break;
+
+            default:
+                Titulo = "Tarte Não Encontrada";
+                Imagem = "not_found.png";
+                Preco = "0.00€";
+                Descricao = "A tarte solicitada não foi encontrada.";
+                break;
+        }
+    }
+}
+
+<head>
+    <link href="styles.css" rel="stylesheet" />
+</head>
+
+<div class="tarte-detalhes">
+    <h1>@Titulo</h1>
+    <img src="@Imagem" alt="@Titulo">
+    <p class="preco">@Preco</p>
+    <p>@Descricao</p>
+    <button class="botao-carrinho">Adicionar ao Carrinho</button>
+    <NavLink href="/" class="a-voltarMenu">Voltar ao menu</NavLink>
+</div>

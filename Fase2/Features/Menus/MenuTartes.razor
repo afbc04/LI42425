@@ -1,0 +1,41 @@
+﻿@page "/"
+@inherits LayoutComponentBase
+@layout Layout.MainLayout
+
+<head>
+    <link href="menuTarte.css" rel="stylesheet" />
+</head>
+
+<h1 class="titulo-menu">Bem-vindo ao Cantinho da Doçura!</h1>
+<h2 class="subtitulo-menu">
+    "Na nossa pastelaria, cada doce é um pedaço de felicidade
+    que derrete na boca e aquece o coração!"
+</h2>
+
+<div class="menu-tartes">
+    @* Cada link aponta para uma página diferente *@
+    <NavLink href="/tarte/maca" class="tarte" tabindex="0">
+        Tarte de Maçã
+        <img src="tarte_maca.png" alt="Tarte de Maçã">
+    </NavLink>
+    <NavLink href="/tarte/rosas" class="tarte" tabindex="0">
+        Tarte Rosas
+        <img src="tarte_rosa.png" alt="Tarte Rosas">
+    </NavLink>
+    <NavLink href="/tarte/mirtilo" class="tarte" tabindex="0">
+        Tarte de Mirtilo
+        <img src="tarte_mirtilo.png" alt="Tarte de Mirtilo">
+    </NavLink>
+    <NavLink href="/tarte/framboesa" class="tarte" tabindex="0">
+        Tarte de Framboesa
+        <img src="tarte_framboesa.png" alt="Tarte de Framboesa">
+    </NavLink>
+    <NavLink href="/tarte/chocolate" class="tarte" tabindex="0">
+        Tarte de Chocolate
+        <img src="tarte_chocolate.png" alt="Tarte de Chocolate">
+    </NavLink>
+    <NavLink href="/tarte/mandala" class="tarte" tabindex="0">
+        Tarte Mandala
+        <img src="tarte_mandala.png" alt="Tarte Mandala">
+    </NavLink>
+</div>
