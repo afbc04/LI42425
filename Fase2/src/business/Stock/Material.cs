@@ -1,4 +1,4 @@
-namespace Materiais {
+namespace business {
 
     public class Material {
 
