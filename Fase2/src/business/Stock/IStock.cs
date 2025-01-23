@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Materiais {
+namespace business {
 
     public interface IStock {
 
