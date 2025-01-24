@@ -1,6 +1,6 @@
 
 
-namespace Utilizadores {
+namespace business {
 
     public abstract class Utilizador {
 

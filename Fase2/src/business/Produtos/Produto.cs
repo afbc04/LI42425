@@ -100,6 +100,20 @@ namespace business {
             return _procedimentos[index];
         }
 
+        public override bool Equals(object? obj) {
+
+            if (obj == null || GetType() != obj.GetType()) {
+                return false;
+            }
+
+            Produto p = (Produto) obj;
+            return this.Id.Equals(p.Id);
+        }
+        
+        public override int GetHashCode() {
+            return this.Id.GetHashCode();
+        }
+
         public Produto Clone() {
             return new Produto(this.Nome,this.Preco,this.Id,this.Imagem,this.Descricao,this.Materiais,this.Procedimentos);
         }

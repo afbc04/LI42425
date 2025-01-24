@@ -1,5 +1,3 @@
-using Produtos;
-
 namespace business {
 
     public class Facade : IFacade {
@@ -9,6 +7,7 @@ namespace business {
         private IGestorProdutos _produtos;
         private IStock _stock;
         private IGestorEncomendas _encomendas;
+        private IGestorUtilizadores _utilizadores;
 
         public Facade() {
 
@@ -17,13 +16,17 @@ namespace business {
             _produtos = new GestorProdutos();
             _stock = new Stock();
             _encomendas = new GestorEncomendas();
+            _utilizadores = new GestorUtilizadores();
 
         }
 
+        public bool isFuncionario(string email) {
+            return _utilizadores.isFuncionario(email);
+        }
 
         //FIXME:
         public bool IniciarSessao(string email, string senha) {
-            return false;
+            return _utilizadores.ValidarSessao(email,senha);
         }
         //FIXME:
         public bool TerminarSessao() {
@@ -31,14 +34,17 @@ namespace business {
         }
 
         public bool RegistarCliente(string email, string nome, string senha, string? tele, string? morada) {
-            return false; //TODO:
+            return _utilizadores.RegistarCliente(email,nome,senha,tele,morada);
         }
+
+        public bool RegistarFuncionario(string email, string nome, string senha) {
+            return _utilizadores.RegistarFuncionario(email,nome,senha);
+        }
+
         public bool AlterarSenha(string email, string senha) {
-            return false; //TODO:
+            return _utilizadores.AlterarSenha(email,senha);
         }
-        public Encomenda? ObterEncomendaCliente(string email, int encomenda) {
-            return null; //TODO:
-        }
+
         public ISet<Produto> ObterTartes() {
             return _produtos.GetProdutos();
         }
@@ -46,50 +52,82 @@ namespace business {
         public Produto? ObterTarte(string produto) {
             return _produtos.GetProduto(produto);
         }
+
         public CarrinhoCompras ObterCarrinhoCompras(string email) {
-            return null; //TODO:
+            return _utilizadores.ObterCarrinhoCompras(email);
         }
+
         public void AddProdutoCarrinhoCompras(string email, string produto) {
-            //TODO:
+            _utilizadores.AddProdutoCarrinhoCompras(email,produto);
         }
+
         public void RemoveProdutoCarrinhoCompras(string email, string produto) {
-            //TODO:
+            _utilizadores.RemoveProdutoCarrinhoCompras(email,produto);
         }
+
         public bool PagarEncomenda(string email) {
             //TODO:
             return false;
         }
+
         public bool CancelarEncomenda(int encomenda) {
             return _encomendas.CancelarEncomenda(encomenda);
         }
         public ISet<Encomenda> GetEncomendasCliente(string email, Filtro? filtro) {
-            //TODO:
-            return null;
+            
+            ISet<int> encomendasCliente = _utilizadores.GetEncomendasCliente(email);
+            ISet<Encomenda> lista = new HashSet<Encomenda>();
+
+            foreach (int e in encomendasCliente) {
+
+                Encomenda? encomenda = _encomendas.GetEncomenda(e);
+
+                if (encomenda is not null) {
+
+                    if (filtro is null || filtro.Filtrar(encomenda))
+                        lista.Add(encomenda.Clone());
+
+                }
+
+            }
+
+            return lista;
+
         }
+
         public void AddAvaliacao(string email, int rating, string? comentario) {
             _avaliacoes.AddAvaliacao(email,rating,comentario);
         }
+
         public ISet<Avaliacao> GetAvaliacoes() {
             return _avaliacoes.GetAvaliacoes();
         }
+
         public void AddProdutoFavoritos(string email, string produto) {
-            //TODO:
+            _utilizadores.AddProdutoFavoritos(email,produto);
         }
+
         public void RemoveProdutoFavoritos(string email, string produto) {
-            //TODO:
+            _utilizadores.RemoveProdutoFavoritos(email,produto);
         }
+
         public ListaDeFavoritos GetFavoritos(string email) {
-            //TODO:
-            return null;
+            return _utilizadores.GetFavoritos(email);
         }
+
         public void ModifyClienteNome(string email, string nome) {
-            //TODO:
+            _utilizadores.ModifyClienteNome(email, nome);
         }
+
+        public bool ModifyClienteEmail(string email, string novo_email) {
+            return _utilizadores.ModifyClienteEmail(email,novo_email);
+        }
+
         public void ModifyClienteMorada(string email, string morada) {
-            //TODO:
+            _utilizadores.ModifyClienteMorada(email,morada);
         }
         public void ModifyClienteTelefone(string email, string telefone) {
-            //TODO:
+            _utilizadores.ModifyClienteTelefone(email,telefone);
         }
         public ISet<FAQ> GetFAQ() {
             return _faq.GetFAQ();
