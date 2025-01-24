@@ -1,4 +1,5 @@
 ﻿@page "/tarte/{NomeTarte}"
+@inject business.IGestorProdutos GestorProdutos
 @inherits LayoutComponentBase
 @layout Layout.MainLayout
 
@@ -6,77 +7,35 @@
     <link href="tarte.css" rel="stylesheet" />
 </head>
 
-@code {
-    [Parameter]
-    public string NomeTarte { get; set; } = string.Empty; // String.Empty permite garantir que caso o parameetro não seja passado, tanha um valor padrão
 
-    private string Titulo { get; set; } = string.Empty;
-    private string Imagem { get; set; } = string.Empty;
-    private string Preco { get; set; } = string.Empty;
-    private string Descricao { get; set; } = string.Empty;
+@code {
+    //A rota /tarte/{NomeTarte} mapeia "rosas" para a propriedade NomeTarte
+    [Parameter] //está a ser usado para declarar que o valor de NomeTarte será definido pela URL
+    public string NomeTarte { get; set; } = string.Empty;
+
+    private business.Produto? ProdutoSelecionado;
 
     protected override void OnParametersSet()
     {
-        // Configura os detalhes da tarte com base no NomeTarte
-        switch (NomeTarte.ToLower())
-        {
-            case "maca":
-                Titulo = "Tarte de Maçã";
-                Imagem = "tarte_maca.png";
-                Preco = "8.00€";
-                Descricao = "Uma deliciosa tarte de maçã com um toque de canela e crocância. Cada fatia é um pedaço de conforto. É o ideal para acompanhar uma chávena de chá num dia frio.";
-                break;
-
-            case "rosas":
-                Titulo = "Tarte Rosas";
-                Imagem = "tarte_rosa.png";
-                Preco = "7.00€";
-                Descricao = "Imagine fatias finas de fruta cuidadosamente moldadas para formar as deslumbrantes rosas. Em baixo destas rosas, encontra-se um recheio suave e cremoso. É a sobremesa ideal para destacar numa mesa.";
-                break;
-
-            case "mirtilo":
-                Titulo = "Tarte de Mirtilo";
-                Imagem = "tarte_mirtilo.png";
-                Preco = "8.50€";
-                Descricao = "Cada fatia contém a combinação perfeita de doçura e acidez. 0 ideal para completar qualquer refeição.";
-                break;
-
-            case "framboesa":
-                Titulo = "Tarte de Framboesa";
-                Imagem = "tarte_framboesa.png";
-                Preco = "8.00€";
-                Descricao = "Esta é mais uma tarte onde cada fatia traz uma explosão deliciosa de sabores. É ainda melhor quando acompanhada com uma bola de gelado.";
-                break;
-
-            case "chocolate":
-                Titulo = "Tarte de Chocolate";
-                Imagem = "tarte_chocolate.png";
-                Preco = "9.00€";
-                Descricao = "A tarte de chocolate é sempre um prazer irresistível. O suave e cremoso creme de chocolate enriquecido com uma pitada de flor de sal é a combinação perfeita para ficar rendido a esta tarte. Os frutos secos completam estes sabores, ao trazerem toques de crocância.";
-                break;
-
-            case "mandala":
-                Titulo = "Tarte Mandala";
-                Imagem = "tarte_mandala.png";
-                Preco = "8.00€";
-                Descricao = "Uma simples e saborosa tarte que lembra a primavera. A perfeita combinação de sabores no recheio e o bonito desenho no topo fazem desta tarte única e especial.";
-                break;
-
-            default:
-                Titulo = "Tarte Não Encontrada";
-                Imagem = "not_found.png";
-                Preco = "0.00€";
-                Descricao = "A tarte solicitada não foi encontrada.";
-                break;
-        }
+        // Procura o produto correspondente ao NomeTarte (id pode ser maca ou rosas por exemplo)
+        ProdutoSelecionado = GestorProdutos.GetProduto(NomeTarte.ToLower());
     }
 }
 
 <div class="tarte-detalhes">
-    <h1>@Titulo</h1>
-    <img src="@Imagem" alt="@Titulo">
-    <p class="preco">@Preco</p>
-    <p>@Descricao</p>
-    <button class="botao-carrinho">Adicionar ao Carrinho</button>
-    <NavLink href="/" class="a-voltarMenu">Voltar ao menu</NavLink>
+    @if (ProdutoSelecionado is not null)
+    {   //exibe os detalhes da tarte encontrada
+        <h1>@ProdutoSelecionado.Nome</h1>
+        <img src="@ProdutoSelecionado.Imagem" alt="@ProdutoSelecionado.Nome" />
+        <p class="preco">@ProdutoSelecionado.Preco.ToString("C")</p>
+        <p>@ProdutoSelecionado.Descricao</p>
+        <button class="botao-carrinho">Adicionar ao Carrinho</button>
+        <NavLink href="/" class="a-voltarMenu">Voltar ao menu</NavLink>
+    }
+    else // não encontrou a tarte
+    {
+        <h1>Tarte Não Encontrada</h1>
+        <p>A tarte solicitada não existe.</p>
+        <NavLink href="/" class="a-voltarMenu">Voltar ao menu</NavLink>
+    }
 </div>
