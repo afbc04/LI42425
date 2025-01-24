@@ -8,6 +8,9 @@ namespace business {
         public string? Descricao {get; set;}
         public string Nome {get; set;}
 
+        public string Id {get; set;}
+        public string? Imagem {get; set;}
+
         private IList<string> _procedimentos;
         public IList<string> Procedimentos {
 
@@ -55,22 +58,26 @@ namespace business {
         }
 
 
-        public Produto(string nome, float preco) {
+        public Produto(string nome, float preco, string id) {
 
             this.Nome = nome;
+            this.Id = id;
             this.Preco = preco;
             this.Descricao = null;
+            this.Imagem = null;
             _procedimentos = new List<string>();
             _materiais = new HashSet<Material>();
 
         }
 
-        public Produto(string nome, float preco, string? descricao) : this(nome,preco) {
+        public Produto(string nome, float preco, string id, string? imagem, string? descricao) : this(nome,preco,id) {
             if (descricao is not null)
                 this.Descricao = descricao;
+            if (imagem is not null)
+                this.Imagem = imagem;
         }
 
-        public Produto(string nome, float preco, string? descricao, ISet<Material> materiais, IList<string> procedimentos) : this(nome,preco,descricao) {
+        public Produto(string nome, float preco, string id, string? imagem, string? descricao, ISet<Material> materiais, IList<string> procedimentos) : this(nome,preco,id,imagem,descricao) {
 
             Materiais = materiais;
             Procedimentos = procedimentos;
@@ -86,7 +93,7 @@ namespace business {
         }
 
         public Produto Clone() {
-            return new Produto(this.Nome,this.Preco,this.Descricao,this.Materiais,this.Procedimentos);
+            return new Produto(this.Nome,this.Preco,this.Id,this.Imagem,this.Descricao,this.Materiais,this.Procedimentos);
         }
 
     }
