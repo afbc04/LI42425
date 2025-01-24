@@ -8,6 +8,7 @@ namespace business {
         private IGestorAvaliacao _avaliacoes;
         private IGestorProdutos _produtos;
         private IStock _stock;
+        private IGestorEncomendas _encomendas;
 
         public Facade() {
 
@@ -15,6 +16,7 @@ namespace business {
             _avaliacoes = new GestorAvaliacao();
             _produtos = new GestorProdutos();
             _stock = new Stock();
+            _encomendas = new GestorEncomendas();
 
         }
 
@@ -34,7 +36,7 @@ namespace business {
         public bool AlterarSenha(string email, string senha) {
             return false; //TODO:
         }
-        public Encomenda? ObterEncomendaCliente(string email, string encomenda) {
+        public Encomenda? ObterEncomendaCliente(string email, int encomenda) {
             return null; //TODO:
         }
         public ISet<Produto> ObterTartes() {
@@ -57,9 +59,8 @@ namespace business {
             //TODO:
             return false;
         }
-        public bool CancelarEncomenda(string email) {
-            //TODO:
-            return false;
+        public bool CancelarEncomenda(int encomenda) {
+            return _encomendas.CancelarEncomenda(encomenda);
         }
         public ISet<Encomenda> GetEncomendasCliente(string email, Filtro? filtro) {
             //TODO:
@@ -93,42 +94,35 @@ namespace business {
         public ISet<FAQ> GetFAQ() {
             return _faq.GetFAQ();
         }
-        public Encomenda? GetEncomenda(string encomenda) {
-            //TODO:
-            return null;
+        public Encomenda? GetEncomenda(int encomenda) {
+            return _encomendas.GetEncomenda(encomenda);
         }
         public ISet<Encomenda> GetEncomendasDoing(Filtro? filtro) {
-            //TODO:
-            return null;
+            return _encomendas.GetEncomendasDoing(filtro);
         }
         public ISet<Encomenda> GetEncomendasDone(Filtro? filtro) {
-            //TODO:
-            return null;
+            return _encomendas.GetEncomendasDone(filtro);
         }
         public ISet<Encomenda> GetEncomendasQueue(Filtro? filtro) {
-            //TODO:
-            return null;
+            return _encomendas.GetEncomendasQueue(filtro);
         }
         public ISet<Material> VerStock() {
             return _stock.GetStock();
         }
-        public Relatorio? GetEncomendaRelatorio(string encomenda) {
-            //TODO:
-            return null;
+        public Relatorio? GetEncomendaRelatorio(int encomenda) {
+            return _encomendas.GetEncomendaRelatorio(encomenda);
         }
-        public bool InterromperEncomendas() {
-            //TODO:
-            return false;
+        public void InterromperEncomendas() {
+            _encomendas.InterromperEncomendas();
         }
-        public bool RetomarEncomendas() {
-            //TODO:
-            return false;
+        public void RetomarEncomendas() {
+            _encomendas.RetomarEncomendas();
         }
-        public void AtualizarEstadoEncomenda(string encomenda) {
-            //TODO:
+        public void AtualizarEstadoEncomenda(int encomenda) {
+            _encomendas.AtualizarEstadoEncomenda(encomenda);
         }
-        public void AtualizarProgressoEncomenda(string encomenda) {
-            //TODO:
+        public void AtualizarProgressoEncomenda(int encomenda, int produto) {
+            _encomendas.AtualizarProgressoEncomenda(encomenda,produto);
         }
         public void SetCapMaxMaterial(string material, int capacidadeMax) {
             _stock.ModifyMaterialQuantidadeMaxima(material,capacidadeMax);

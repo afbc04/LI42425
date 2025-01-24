@@ -92,6 +92,14 @@ namespace business {
             _materiais.Remove(new Material(material,0));
         }
 
+        public string? GetProcedimento(int index) {
+
+            if (index < 0 || index >= _procedimentos.Count) 
+                return null;
+                
+            return _procedimentos[index];
+        }
+
         public Produto Clone() {
             return new Produto(this.Nome,this.Preco,this.Id,this.Imagem,this.Descricao,this.Materiais,this.Procedimentos);
         }
