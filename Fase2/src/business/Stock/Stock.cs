@@ -49,7 +49,7 @@ namespace business {
             this._materiais.Remove(material);
         }
 
-        public void AddQuantidadeMaterial(string material, int q) {
+        public void AddMaterialQuantidade(string material, int q) {
 
             int quantidade = _materiais[material].Quantidade += q;
             int quantidade_max = _materiais[material].QuantidadeMaxima;
@@ -58,11 +58,21 @@ namespace business {
 
         }
 
-        public void RemoveQuantidadeMaterial(string material, int q) {
+        public void RemoveMaterialQuantidade(string material, int q) {
 
             int quantidade = _materiais[material].Quantidade -= q;
 
             _materiais[material].Quantidade = (quantidade < 0) ? 0 : quantidade;
+
+        }
+
+        public void ModifyMaterialQuantidade(string material, int q) {
+            int res = _materiais[material].Quantidade - q;
+
+            if (res > 0) 
+                RemoveMaterialQuantidade(material,res);
+            else 
+                AddMaterialQuantidade(material,res);
 
         }
 
@@ -93,7 +103,7 @@ namespace business {
             ISet<Material> materiais = produto.Materiais;
 
             foreach(Material m in materiais) {
-                RemoveQuantidadeMaterial(m.Tipo,m.Quantidade);
+                RemoveMaterialQuantidade(m.Tipo,m.Quantidade);
             }
 
             return true;

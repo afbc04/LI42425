@@ -131,10 +131,10 @@ namespace business {
             //TODO:
         }
         public void SetCapMaxMaterial(string material, int capacidadeMax) {
-            //TODO:
+            _stock.ModifyMaterialQuantidadeMaxima(material,capacidadeMax);
         }
         public void SetMaterialQuantidade(string material, int quantidade) {
-            //TODO:
+            _stock.ModifyMaterialQuantidade(material,quantidade);
         }
         public void AddMaterialStock(string material, int quantidade_max) {
             _stock.AddMaterial(material,quantidade_max);
