@@ -4,65 +4,114 @@ namespace business {
 
     public class Stock : IStock{
 
-        private IDictionary<string,Material> _materiais;
+        private IDictionary<string,StockEntry> _materiais;
         public ISet<Material> Materiais {
             get {
                 HashSet<Material> materiais = new HashSet<Material>();
                 
-                foreach(Material p in _materiais.Values)
-                    materiais.Add(p.Clone());
+                IEnumerable<KeyValuePair<string, StockEntry>> entrySet = _materiais;
+
+                foreach (var entry in entrySet)
+                    materiais.Add(new Material(entry.Key,entry.Value.Quantidade));
 
                 return materiais;
 
-            }
-            set {
-                if (value is null)
-                    _materiais = new Dictionary<string,Material>();
-                else {
-
-                    Dictionary<string,Material> materiais = new();
-                
-                    foreach(Material p in value)
-                        materiais[p.Tipo] = p.Clone();
-
-                    _materiais = materiais;
-
-                }
             }
         }
 
         public Stock() {
 
-            _materiais = new Dictionary<string,Material>();
+            _materiais = new Dictionary<string,StockEntry>();
 
+        }
+
+        public ISet<Material> GetStock() {
+            return this.Materiais;
         }
 
         public bool Contains(string material) {
             return _materiais.ContainsKey(material);
         }
 
-        public int Quantidade(string material) {
+        public int GetMaterialQuantidade(string material) {
             return _materiais[material].Quantidade;
         }
 
-        public bool QuantidadeSuficiente(string material, int limite) {
+        public bool GetMaterialQuantidadeSuficiente(string material, int limite) {
             return _materiais[material].Quantidade >= limite;
         }
 
-        public void Add(Material material) {
-            this._materiais.Add(material.Tipo,material.Clone());
+        public void AddMaterial(string material, int quantidade_maxima) {
+            this._materiais.Add(material,new StockEntry(0,quantidade_maxima));
         }
 
-        public void Remove(string material) {
+        public void RemoveMaterial(string material) {
             this._materiais.Remove(material);
         }
 
-        public void AddQuantidade(string material, int q) {
-            _materiais[material].Quantidade += q;
+        public void AddQuantidadeMaterial(string material, int q) {
+
+            int quantidade = _materiais[material].Quantidade += q;
+            int quantidade_max = _materiais[material].QuantidadeMaxima;
+
+            _materiais[material].Quantidade = (quantidade > quantidade_max) ? quantidade_max : quantidade;
+
         }
 
-        public void RemoveQuantidade(string material, int q) {
-            _materiais[material].Quantidade -= q;
+        public void RemoveQuantidadeMaterial(string material, int q) {
+
+            int quantidade = _materiais[material].Quantidade -= q;
+
+            _materiais[material].Quantidade = (quantidade < 0) ? 0 : quantidade;
+
+        }
+
+        public void ModifyMaterialQuantidadeMaxima(string material, int max) {
+            _materiais[material].QuantidadeMaxima = max;
+        }
+
+        public bool ConsegueProduzir(Produto produto) {
+
+            ISet<Material> materiais = produto.Materiais;
+
+            foreach(Material m in materiais) {
+
+                if (GetMaterialQuantidadeSuficiente(m.Tipo,m.Quantidade) == false)
+                    return false;
+
+            }
+
+            return true;
+
+        }
+
+        public bool ProduzirProduto(Produto produto) {
+
+            if (ConsegueProduzir(produto) == false)
+                return false;
+
+            ISet<Material> materiais = produto.Materiais;
+
+            foreach(Material m in materiais) {
+                RemoveQuantidadeMaterial(m.Tipo,m.Quantidade);
+            }
+
+            return true;
+
+        }
+
+        private class StockEntry {
+
+            public int Quantidade {get; set;}
+            public int QuantidadeMaxima {get; set;}
+
+            public StockEntry(int quantidade, int max) {
+
+                Quantidade = quantidade;
+                QuantidadeMaxima = max;
+
+            }
+
         }
 
 

@@ -106,8 +106,7 @@ namespace business {
             return null;
         }
         public ISet<Material> VerStock() {
-            //TODO:
-            return null;
+            return _stock.GetStock();
         }
         public Relatorio? GetEncomendaRelatorio(string encomenda) {
             //TODO:
@@ -133,11 +132,11 @@ namespace business {
         public void SetMaterialQuantidade(string material, int quantidade) {
             //TODO:
         }
-        public void AddMaterialStock(string material) {
-            //TODO:
+        public void AddMaterialStock(string material, int quantidade_max) {
+            _stock.AddMaterial(material,quantidade_max);
         }
         public void RemoveMaterialStock(string material) {
-            //TODO:
+            _stock.RemoveMaterial(material);
         }
         public void AddTarte(string id, string nome, float preco, string? imagem, string? descricao, ISet<Material> materiais, IList<string> procedimentos) {
             _produtos.AddProduto(nome,preco,id,imagem,descricao,materiais,procedimentos);
