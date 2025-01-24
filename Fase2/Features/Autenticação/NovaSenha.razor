@@ -1,0 +1,29 @@
+﻿<h3>NovaSenha</h3>
+
+@page "/recuperarsenha/nova-senha"
+@page "/recuperarsenha/nova-senha?email={Email}"
+
+<div class="container">
+    <div class="logo">
+        <img src="logo.png" alt="Logo do Cantinho da Doçura" />
+    </div>
+
+    <h2>Recuperar Password</h2>
+    <p>Insira a Nova Password</p>
+    <form @onsubmit="HandlePasswordReset">
+        <input type="password" placeholder="NOVA PASSWORD" @bind="NovaPassword" required />
+        <button type="submit">Confirmar</button>
+    </form>
+</div>
+
+@code {
+    [Parameter] public string Email { get; set; } = string.Empty;
+    private string NovaPassword { get; set; } = string.Empty;
+
+    private void HandlePasswordReset()
+    {
+       Console.WriteLine($"Senha redefinida com sucesso para: {Email}");
+     
+    }
+}
+

@@ -43,6 +43,16 @@ app.UseAntiforgery();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
+builder.Services.AddSingleton(sp => new EmailService(
+    smtpServer: "smtp.gmail.com",
+    port: 587,
+    senderEmail: "seuemail@gmail.com",
+    senderPassword: "suasenha"
+));
+
+
+builder.Services.AddSingleton<RecoveryCodeService>();
+
 app.Run();
 
 /*

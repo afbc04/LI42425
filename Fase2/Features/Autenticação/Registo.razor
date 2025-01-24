@@ -1,5 +1,38 @@
 ﻿<h3>Registo</h3>
 
+@page "/registo"
+
+<div class="container">
+    <div class="logo">
+        <img src="logo.png" alt="Logo do Cantinho da Doçura" />
+    </div>
+
+    <h2>Registar</h2>
+    <form @onsubmit="HandleRegister">
+        <input type="text" placeholder="NOME" @bind="Nome" required />
+        <input type="email" placeholder="EMAIL" @bind="Email" required />
+        <input type="tel" placeholder="Nº TELEFONE" @bind="Telefone" required />
+        <input type="text" placeholder="MORADA" @bind="Morada" required />
+        <input type="password" placeholder="PASSWORD" @bind="Password" required />
+        <button type="submit">Confirmar</button>
+    </form>
+
+    <p>Já tem conta? <NavLink href="/login">Fazer Login</NavLink></p>
+</div>
+
 @code {
-	//codigo para ligar ao backend aaaa
+    // Propriedades do registo
+    private string Nome { get; set; } = string.Empty;
+    private string Email { get; set; } = string.Empty;
+    private string Telefone { get; set; } = string.Empty;
+    private string Morada { get; set; } = string.Empty;
+    private string Password { get; set; } = string.Empty;
+
+    // Método chamado ao submeter o registo
+    private void HandleRegister()
+    {
+        // ligação á base de dados para guardar os dados recebidos
+        Console.WriteLine($"Registo: {Nome}, {Email}, {Telefone}, {Morada}, {Password}");
+    }
 }
+

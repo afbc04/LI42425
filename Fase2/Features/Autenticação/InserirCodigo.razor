@@ -1,0 +1,41 @@
+﻿@page "/recuperarsenha/codigo"
+@page "/recuperarsenha/codigo?email={Email}"
+@inject RecoveryCodeService CodeService
+@inject NavigationManager Navigation
+
+<div class="container">
+    <div class="logo">
+        <img src="logo.png" alt="Logo do Cantinho da Doçura" />
+    </div>
+
+    <h2>Recuperar Password</h2>
+    <p>Insira o código que recebeu no email</p>
+    <form @onsubmit="HandleCodeSubmission">
+        <input type="text" placeholder="CÓDIGO" @bind="Codigo" required />
+        <button type="submit">Confirmar</button>
+    </form>
+</div>
+
+@code {
+    [Parameter] public string Email { get; set; } = string.Empty;
+    private string Codigo { get; set; } = string.Empty;
+
+    private void HandleCodeSubmission()
+    {
+        if (CodeService.TryGetCode(Email, out var expectedCode) && Codigo == expectedCode)
+        {
+            Console.WriteLine($"Código válido para: {Email}");
+
+            // Redireciona para a redefinição de senha
+            Navigation.NavigateTo($"/recuperarsenha/nova-senha?email={Uri.EscapeDataString(Email)}");
+
+            // Remove o código após a validação
+            CodeService.RemoveCode(Email);
+        }
+        else
+        {
+            Console.WriteLine("Código inválido!");
+            // Opcional: exibir uma mensagem de erro na interface
+        }
+    }
+}

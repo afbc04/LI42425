@@ -1,5 +1,29 @@
 ﻿<h3>Login</h3>
 
-@code {
+@page "/login"
 
+<div class="container">
+    <div class="logo">
+        <img src="logo.png" alt="Logo do Cantinho da Doçura" />
+    </div>
+    <h2>Login</h2>
+    <form @onsubmit="HandleSubmit">
+        <input type="email" placeholder="EMAIL" @bind="Email" required />
+        <input type="password" placeholder="PASSWORD" @bind="Password" required />
+        <button type="submit">Confirmar</button>
+    </form>
+    <p>Ainda não tem conta? <NavLink href="/registo">Fazer Registo</NavLink></p>
+    <p>Esqueceu a sua Password? <NavLink href="/recuperacaopassword">Clique Aqui</NavLink></p>
+</div>
+
+@code {
+    private string Email { get; set; } = string.Empty;
+    private string Password { get; set; } = string.Empty;
+
+    private void HandleSubmit()
+    {
+        // Ir á base de dados ver se existe o utilizador
+        Console.WriteLine($"Email: {Email}, Password: {Password}");
+    }
 }
+
