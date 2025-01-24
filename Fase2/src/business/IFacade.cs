@@ -14,6 +14,7 @@ namespace business {
         public bool AlterarSenha(string email, string senha);
         public Encomenda? ObterEncomendaCliente(string email, string encomenda);
         public ISet<Produto> ObterTartes();
+        public Produto? ObterTarte(string tarte);
         public CarrinhoCompras ObterCarrinhoCompras(string email);
         public void AddProdutoCarrinhoCompras(string email, string produto);
         public void RemoveProdutoCarrinhoCompras(string email, string produto);

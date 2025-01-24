@@ -40,6 +40,10 @@ namespace business {
         public ISet<Produto> ObterTartes() {
             return _produtos.GetProdutos();
         }
+
+        public Produto? ObterTarte(string produto) {
+            return _produtos.GetProduto(produto);
+        }
         public CarrinhoCompras ObterCarrinhoCompras(string email) {
             return null; //TODO:
         }
