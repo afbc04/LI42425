@@ -16,15 +16,15 @@ namespace CantinhoDasEncomendas
             // Registra o GestorProdutos como um servi�o Singleton
             builder.Services.AddSingleton<IFacade, Facade>(sp => PovoarFacade());
 
-            builder.Services.AddSingleton(sp => new EmailService(
-                smtpServer: "smtp.gmail.com",
-                port: 587,
-                senderEmail: "seuemail@gmail.com",
-                senderPassword: "suasenha"
-            ));
+            //builder.Services.AddSingleton(sp => new EmailService(
+            //    smtpServer: "smtp.gmail.com",
+            //    port: 587,
+            //    senderEmail: "seuemail@gmail.com",
+            //    senderPassword: "suasenha"
+            //));
 
 
-            builder.Services.AddSingleton<RecoveryCodeService>();
+            //builder.Services.AddSingleton<RecoveryCodeService>();
 
             // Add services to the container.
             builder.Services.AddRazorComponents()
@@ -40,7 +40,7 @@ namespace CantinhoDasEncomendas
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseStaticFiles();
             app.UseAntiforgery();
