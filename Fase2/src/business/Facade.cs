@@ -40,8 +40,6 @@ namespace business {
 
         public bool IniciarSessao(string email, string senha) {
 
-            Console.WriteLine("AAA");
-
             bool res = _utilizadores.ValidarSessao(email,senha);
             if (res)
                 this.email = email;
@@ -215,11 +213,11 @@ namespace business {
         public ISet<Encomenda> GetEncomendasQueue(Filtro? filtro) {
             return _encomendas.GetEncomendasQueue(filtro);
         }
-        public ISet<Material> VerStock() {
+        public ISet<MaterialStock> VerStock() {
             return _stock.GetStock();
         }
 
-        public ISet<Material> GetMaterialBaixoStock() {
+        public ISet<MaterialStock> GetMaterialBaixoStock() {
             return _stock.GetMaterialBaixoStock();
         }
 
@@ -256,7 +254,16 @@ namespace business {
         public void RemoveTarte(string id) {
             _produtos.RemoveProduto(id);
         }
+        public bool MaterialExiste(string material) {
+            return _stock.MaterialExiste(material);
+        }
         
+        //UI
+
+        public bool ProducaoInterrompida() {
+            return _encomendas.ProducaoInterrompida();
+        }
+
 
     }
 

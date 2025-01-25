@@ -37,20 +37,25 @@ namespace business {
         public ISet<Encomenda> GetEncomendasDoing(Filtro? filtro);
         public ISet<Encomenda> GetEncomendasDone(Filtro? filtro);
         public ISet<Encomenda> GetEncomendasQueue(Filtro? filtro);
-        public ISet<Material> VerStock();
+        public ISet<MaterialStock> VerStock();
         public Relatorio? GetEncomendaRelatorio(int encomenda);
         public void InterromperEncomendas();
         public void RetomarEncomendas();
         public void AtualizarEstadoEncomenda(int encomenda);
         public void AtualizarProgressoEncomenda(int encomenda, int produto);
         public void SetCapMaxMaterial(string material, int capacidadeMax);
-        public ISet<Material> GetMaterialBaixoStock();
+        public ISet<MaterialStock> GetMaterialBaixoStock();
         public void SetMaterialQuantidade(string material, int quantidade);
         public void AddMaterialStock(string material, int quantidade_max);
         public void RemoveMaterialStock(string material);
         public void AddTarte(string id, string nome, float preco, string? imagem, string? descricao, ISet<Material> materiais, IList<string> procedimentos);
         public void RemoveTarte(string id);
+        public bool MaterialExiste(string material);
+
+        //UI
+        public bool ProducaoInterrompida();
+        //public int QuantidadeEncomendas();
 
     }
 
-}
+}   

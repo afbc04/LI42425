@@ -4,15 +4,13 @@ namespace business {
 
     public class Stock : IStock{
 
-        private IDictionary<string,StockEntry> _materiais;
-        public ISet<Material> Materiais {
+        private IDictionary<string,MaterialStock> _materiais;
+        public ISet<MaterialStock> Materiais {
             get {
-                HashSet<Material> materiais = new HashSet<Material>();
+                HashSet<MaterialStock> materiais = new HashSet<MaterialStock>();
                 
-                IEnumerable<KeyValuePair<string, StockEntry>> entrySet = _materiais;
-
-                foreach (var entry in entrySet)
-                    materiais.Add(new Material(entry.Key,entry.Value.Quantidade));
+                foreach (MaterialStock m in _materiais.Values)
+                    materiais.Add(m.Clone());
 
                 return materiais;
 
@@ -21,63 +19,60 @@ namespace business {
 
         public Stock() {
 
-            _materiais = new Dictionary<string,StockEntry>();
+            _materiais = new Dictionary<string,MaterialStock>();
 
         }
 
-        public ISet<Material> GetStock() {
+        public ISet<MaterialStock> GetStock() {
             return this.Materiais;
         }
 
-        public bool Contains(string material) {
-            return _materiais.ContainsKey(material);
-        }
-
         public int GetMaterialQuantidade(string material) {
-            return _materiais[material].Quantidade;
+            return _materiais[material.ToUpperInvariant()].Quantidade;
         }
 
         public bool GetMaterialQuantidadeSuficiente(string material, int limite) {
-            return _materiais[material].Quantidade >= limite;
+            return _materiais[material.ToUpperInvariant()].Quantidade >= limite;
         }
 
         public void AddMaterial(string material, int quantidade_maxima) {
-            this._materiais.Add(material,new StockEntry(0,quantidade_maxima));
+            _materiais[material.ToUpperInvariant()] = new MaterialStock(0,quantidade_maxima,material.ToUpperInvariant());
         }
 
         public void RemoveMaterial(string material) {
-            this._materiais.Remove(material);
+            this._materiais.Remove(material.ToUpperInvariant());
         }
 
         public void AddMaterialQuantidade(string material, int q) {
 
-            int quantidade = _materiais[material].Quantidade += q;
-            int quantidade_max = _materiais[material].QuantidadeMaxima;
+            int quantidade = _materiais[material.ToUpperInvariant()].Quantidade += q;
+            int quantidade_max = _materiais[material.ToUpperInvariant()].QuantidadeMaxima;
 
-            _materiais[material].Quantidade = (quantidade > quantidade_max) ? quantidade_max : quantidade;
+            _materiais[material.ToUpperInvariant()].Quantidade = (quantidade > quantidade_max) ? quantidade_max : quantidade;
 
         }
 
         public void RemoveMaterialQuantidade(string material, int q) {
 
-            int quantidade = _materiais[material].Quantidade -= q;
+            int quantidade = _materiais[material.ToUpperInvariant()].Quantidade -= q;
 
-            _materiais[material].Quantidade = (quantidade < 0) ? 0 : quantidade;
+            _materiais[material.ToUpperInvariant()].Quantidade = (quantidade < 0) ? 0 : quantidade;
 
         }
 
         public void ModifyMaterialQuantidade(string material, int q) {
-            int res = _materiais[material].Quantidade - q;
 
-            if (res > 0) 
-                RemoveMaterialQuantidade(material,res);
-            else 
-                AddMaterialQuantidade(material,res);
+            if (q < 0)
+                q = 0;
+            if (q > _materiais[material.ToUpperInvariant()].QuantidadeMaxima)
+                q = _materiais[material.ToUpperInvariant()].QuantidadeMaxima;
+
+            _materiais[material.ToUpperInvariant()].Quantidade = q;
 
         }
 
         public void ModifyMaterialQuantidadeMaxima(string material, int max) {
-            _materiais[material].QuantidadeMaxima = max;
+            _materiais[material.ToUpperInvariant()].QuantidadeMaxima = max;
         }
 
         public bool ConsegueProduzir(Produto produto) {
@@ -123,17 +118,17 @@ namespace business {
 
         }
 
-        public ISet<Material> GetMaterialBaixoStock() {
+        public ISet<MaterialStock> GetMaterialBaixoStock() {
 
-            ISet<Material> lista = new HashSet<Material>();
+            ISet<MaterialStock> lista = new HashSet<MaterialStock>();
 
             foreach (string s in _materiais.Keys) {
 
-                StockEntry e = _materiais[s];
-                float perc = e.Quantidade / e.QuantidadeMaxima;
+                MaterialStock e = _materiais[s];
+                float perc = (float) e.Quantidade / (float) e.QuantidadeMaxima;
 
                 if (perc <= 0.1) {
-                    lista.Add(new Material(s,e.Quantidade));
+                    lista.Add(e.Clone());
                 }
 
             }
@@ -142,20 +137,9 @@ namespace business {
 
         }
 
-        private class StockEntry {
-
-            public int Quantidade {get; set;}
-            public int QuantidadeMaxima {get; set;}
-
-            public StockEntry(int quantidade, int max) {
-
-                Quantidade = quantidade;
-                QuantidadeMaxima = max;
-
-            }
-
+        public bool MaterialExiste(string material) {
+            return _materiais.ContainsKey(material.ToUpperInvariant());
         }
-
 
     }
 

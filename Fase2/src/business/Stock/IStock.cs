@@ -4,7 +4,7 @@ namespace business {
 
     public interface IStock {
 
-        public ISet<Material> GetStock();
+        public ISet<MaterialStock> GetStock();
         public int GetMaterialQuantidade(string material);
         public bool GetMaterialQuantidadeSuficiente(string material, int limite);
         public void AddMaterial(string material, int quantidade_maxima);
@@ -16,7 +16,8 @@ namespace business {
         public bool ConsegueProduzir(Produto produto);
         public bool ProduzirProduto(Produto produto);
         public bool TemMaterialSuficiente(ISet<Material> materiais);
-        public ISet<Material> GetMaterialBaixoStock();
+        public ISet<MaterialStock> GetMaterialBaixoStock();
+        public bool MaterialExiste(string material);
 
     }
 

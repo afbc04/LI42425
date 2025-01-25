@@ -36,6 +36,7 @@ namespace business {
 
             _encomenda_Numero = 1;
             _encomendas = new Dictionary<int,Encomenda>();
+            Interrompido = false;
 
         }
 
@@ -51,7 +52,10 @@ namespace business {
         }
 
         public Encomenda? GetEncomenda(int id) {
-            return _encomendas[id];
+            if (_encomendas.ContainsKey(id))
+                return _encomendas[id];
+            else
+                return null;
         }
 
         public ISet<Encomenda> GetEncomendasDoing(Filtro? filtro) {
@@ -158,6 +162,10 @@ namespace business {
             _encomenda_Numero++;
             _encomendas[e.ID] = e;
 
+        }
+
+        public bool ProducaoInterrompida() {
+            return this.Interrompido;
         }
 
     }
