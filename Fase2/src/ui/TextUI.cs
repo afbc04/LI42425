@@ -11,7 +11,7 @@ namespace ui {
 
         public TextUI() {
 
-            //this.Model = new TurmasFacade();
+            this.Model = new Facade();
             //scin = new Scanner(System.in);
         }
 
