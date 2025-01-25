@@ -1,0 +1,69 @@
+﻿
+.container {
+    text-align: center; /* Centraliza o texto dentro do container */
+    background: #ffffff;
+    padding: 20px 40px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 400px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra suave */
+    box-sizing: border-box; /* Garante que o tamanho não ultrapassa os limites */
+}
+
+.logo {
+    width: 302px;
+    height: 250px;
+    margin: 0 auto 20px auto;
+    border: 1px solid #000; /* Adiciona uma borda preta */
+    display: flex;
+    justify-content: center; /* Alinha horizontalmente o conteúdo */
+    align-items: center; /* Alinha verticalmente o conteúdo */
+    font-size: 18px;
+    font-weight: bold;
+}
+
+h2 {
+    margin-bottom: 20px; /* Espaço abaixo do título */
+}
+
+form input {
+    display: block;
+    padding: 10px;
+    width: 302px;
+    margin: 0 auto 10px auto; /* Centraliza os inputs dentro do container */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #e6e6e6;
+    box-sizing: border-box; /* Garante que padding não ultrapassa a largura */
+}
+
+form button {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    width: 302px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto; /* Centraliza o botão dentro do container */
+}
+
+    form button:hover {
+        background-color: #333;
+    }
+
+.container p {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+    .container p a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+        .container p a:hover {
+            text-decoration: underline;
+        }

@@ -7,16 +7,17 @@ var builder = WebApplication.CreateBuilder(args);
 
 //É singleton porque deve ser unico para toda a aplicação de modo a evitar inconsistência de dados
 // Registra o GestorProdutos como um serviço Singleton
-//Substituir pela bd se possível
-builder.Services.AddSingleton<IGestorProdutos, GestorProdutos>(sp =>
+builder.Services.AddSingleton<IFacade, Facade>(sp =>
 {
-    var gestor = new GestorProdutos();
-    gestor.AddProduto("Tarte de Maçã", 8.00f, "maca", "tarte_maca.png", "Uma deliciosa tarte de maçã com um toque de canela e crocância.");
-    gestor.AddProduto("Tarte Rosas", 7.00f, "rosas", "tarte_rosa.png", "Imagine fatias finas de fruta moldadas em rosas.");
-    gestor.AddProduto("Tarte de Mirtilo", 8.50f, "mirtilo", "tarte_mirtilo.png", "Cada fatia contém a combinação perfeita de doçura e acidez. O ideal para completar qualquer refeição.");
-    gestor.AddProduto("Tarte de Framboesa", 8.00f, "framboesa", "tarte_framboesa.png", "Esta é mais uma tarte onde cada fatia traz uma explosão deliciosa de sabores. É ainda melhor quando acompanhada com uma bola de gelado.");
-    gestor.AddProduto("Tarte de Chocolate", 9.00f, "chocolate", "tarte_chocolate.png", "A tarte de chocolate é sempre um prazer irresistível. O suave e cremoso creme de chocolate enriquecido com uma pitada de flor de sal é a combinação perfeita para ficar rendido a esta tarte. Os frutos secos completam estes sabores, ao trazerem toques de crocância.");
-    gestor.AddProduto("Tarte Mandala", 8.00f, "mandala", "tarte_mandala.png", "Uma simples e saborosa tarte que lembra a primavera. A perfeita combinação de sabores no recheio e o bonito desenho no topo fazem desta tarte única e especial");
+    var gestor = new Facade();
+    IList<string> t1 = new List<string>();
+    ISet<Material> t2 = new HashSet<Material>();
+    gestor.AddTarte("maca", "Tarte de Maçã", 8.00f, "tarte_maca.png", "Uma deliciosa tarte de maçã com um toque de canela e crocância.", t2, t1);
+    gestor.AddTarte("rosas", "Tarte Rosas", 7.00f, "tarte_rosa.png", "Imagine fatias finas de fruta moldadas em rosas.", t2, t1);
+    gestor.AddTarte("mirtilo", "Tarte de Mirtilo", 8.50f, "tarte_mirtilo.png", "Cada fatia contém a combinação perfeita de doçura e acidez. O ideal para completar qualquer refeição.", t2, t1);
+    gestor.AddTarte("framboesa", "Tarte de Framboesa", 8.00f, "tarte_framboesa.png", "Esta é mais uma tarte onde cada fatia traz uma explosão deliciosa de sabores. É ainda melhor quando acompanhada com uma bola de gelado.", t2, t1);
+    gestor.AddTarte("chocolate", "Tarte de Chocolate", 9.00f, "tarte_chocolate.png", "A tarte de chocolate é sempre um prazer irresistível. O suave e cremoso creme de chocolate enriquecido com uma pitada de flor de sal é a combinação perfeita para ficar rendido a esta tarte. Os frutos secos completam estes sabores, ao trazerem toques de crocância.", t2, t1);
+    gestor.AddTarte("mandala", "Tarte Mandala", 8.00f, "tarte_mandala.png", "Uma simples e saborosa tarte que lembra a primavera. A perfeita combinação de sabores no recheio e o bonito desenho no topo fazem desta tarte única e especial", t2, t1);
 
     return gestor;
 });

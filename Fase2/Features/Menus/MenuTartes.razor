@@ -1,9 +1,10 @@
 ﻿@page "/"
+@inject business.IFacade Facade
 @inherits LayoutComponentBase
 @layout Layout.MainLayout
 
 <head>
-    <link href="css/menuTarte.css" rel="stylesheet" />
+    <link href="menuTarte.css" rel="stylesheet" />
 </head>
 
 <h1 class="titulo-menu">Bem-vindo ao Cantinho da Doçura!</h1>
@@ -13,29 +14,18 @@
 </h2>
 
 <div class="menu-tartes">
-    @* Cada link aponta para uma página diferente *@
-    <NavLink href="/tarte/maca" class="tarte" tabindex="0">
-        Tarte de Maçã
-        <img src="images/tarte_maca.png" alt="Tarte de Maçã">
-    </NavLink>
-    <NavLink href="/tarte/rosas" class="tarte" tabindex="0">
-        Tarte Rosas
-        <img src="images/tarte_rosa.png" alt="Tarte Rosas">
-    </NavLink>
-    <NavLink href="/tarte/mirtilo" class="tarte" tabindex="0">
-        Tarte de Mirtilo
-        <img src="images/tarte_mirtilo.png" alt="Tarte de Mirtilo">
-    </NavLink>
-    <NavLink href="/tarte/framboesa" class="tarte" tabindex="0">
-        Tarte de Framboesa
-        <img src="images/tarte_framboesa.png" alt="Tarte de Framboesa">
-    </NavLink>
-    <NavLink href="/tarte/chocolate" class="tarte" tabindex="0">
-        Tarte de Chocolate
-        <img src="images/tarte_chocolate.png" alt="Tarte de Chocolate">
-    </NavLink>
-    <NavLink href="/tarte/mandala" class="tarte" tabindex="0">
-        Tarte Mandala
-        <img src="images/tarte_mandala.png" alt="Tarte Mandala">
-    </NavLink>
+    @* Gera os links dinamicamente a partir do Facade *@
+    @foreach (var tarte in Facade.ObterTartes())
+    {
+        /*o Blazor não permite combinar C# e HTML diretamente
+        dentro do atributo de um componente (como href)
+        href="/tarte/@tarte.Id", o Blazor interpreta como "conteúdo misto"
+        o href espera receber uma unica expressão C# ou uma string
+        ao usar @() transforma em uma unica string e o blazor consegue processar
+        */
+        <NavLink class="tarte" href=@($"/tarte/{tarte.Id}") tabindex="0">
+            @tarte.Nome
+            <img src="@tarte.Imagem" alt="@tarte.Nome" />
+        </NavLink>
+    }
 </div>

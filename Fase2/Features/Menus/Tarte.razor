@@ -1,5 +1,5 @@
 ﻿@page "/tarte/{NomeTarte}"
-@inject business.IGestorProdutos GestorProdutos
+@inject business.IFacade Facade
 @inherits LayoutComponentBase
 @layout Layout.MainLayout
 
@@ -18,7 +18,7 @@
     protected override void OnParametersSet()
     {
         // Procura o produto correspondente ao NomeTarte (id pode ser maca ou rosas por exemplo)
-        ProdutoSelecionado = GestorProdutos.GetProduto(NomeTarte.ToLower());
+        ProdutoSelecionado = Facade.ObterTarte(NomeTarte.ToLower());
     }
 }
 
