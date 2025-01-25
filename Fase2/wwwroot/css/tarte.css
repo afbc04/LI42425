@@ -1,6 +1,6 @@
 ﻿.tarte-detalhes {
     display: block; /*permite que os elementos sejam empilhados verticalmente*/
-    margin: 100px auto; /* Centraliza o conteúdo horizontalmente */
+    margin: 80px auto; /* Centraliza o conteúdo horizontalmente */
     max-width: 600px; /* Define a largura máxima da área de detalhes */
     padding: 50px;
     background-color: #fff; /* Fundo branco */

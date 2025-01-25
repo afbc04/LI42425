@@ -1,5 +1,6 @@
 ﻿@page "/login"
 
+@*
 <div>
     <h1>Login</h1>
     <input @bind="Email" placeholder="Email" />
@@ -78,3 +79,22 @@ private async Task Submit()
     }
 }
 *@
+
+
+<head>
+    <link href="css/autenticacao.css" rel="stylesheet" />
+</head>
+
+<div class="container">
+    <div class="logo">
+        <img src="images/logo.png" alt="Logo do Cantinho da Doçura">
+    </div>
+    <h2>Login</h2>
+    <form>
+        <input type="email" placeholder="EMAIL" required />
+        <input type="password" placeholder="PASSWORD" required />
+        <button type="submit">Confirmar</button>
+    </form>
+    <p>Ainda não tem conta? <a href="/registo">Fazer Registo</a></p>
+    <p>Esqueceu a sua Password? <a href="/recuperarsenha">Clique Aqui</a></p>
+</div>

@@ -96,19 +96,6 @@ main {
         top: 0.5rem;
     }
 */
-
-body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: white;
-    display: block;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /*define a altura da janela do browser*/
-    box-sizing: border-box; /* Inclui padding e border no cálculo do tamanho */
-}
-
 /* Estilos para o menu */
 .menu-h { /* Mudando de #menu-h para .menu-h */
     list-style-type: none; /* Remove os pontos da lista */
