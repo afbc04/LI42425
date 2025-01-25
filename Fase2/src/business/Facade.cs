@@ -39,6 +39,9 @@ namespace business {
         }
 
         public bool IniciarSessao(string email, string senha) {
+
+            Console.WriteLine("AAA");
+
             bool res = _utilizadores.ValidarSessao(email,senha);
             if (res)
                 this.email = email;

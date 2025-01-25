@@ -10,6 +10,14 @@ namespace CantinhoDasEncomendas
 
         public static void Main(string[] args) {
 
+            /*
+                Cantinho Das Encomendas -- versão texto
+            */
+            if (args.Count() > 0 && args[0] == "txt") {
+                CantinhoDasEncomendasTxt();
+                return;
+            }
+
             var builder = WebApplication.CreateBuilder(args);
 
             //� singleton porque deve ser unico para toda a aplica��o de modo a evitar inconsist�ncia de dados
@@ -23,6 +31,7 @@ namespace CantinhoDasEncomendas
             //    senderPassword: "suasenha"
             //));
 
+            Console.WriteLine("TESTE");
 
             //builder.Services.AddSingleton<RecoveryCodeService>();
 
@@ -42,6 +51,7 @@ namespace CantinhoDasEncomendas
 
             //app.UseHttpsRedirection();
 
+            app.UseRouting(); // Adicionar routing aqui se estiver faltando
             app.UseStaticFiles();
             app.UseAntiforgery();
 
@@ -196,21 +206,9 @@ namespace CantinhoDasEncomendas
 
         }
 
-    }
-
-
-}
-
-/*
-namespace CantinhoDasEncomendas {
-
-    public class CantinhoDasEncomendas {
-
-        public static void Main(string[] args) {
+        public static void CantinhoDasEncomendasTxt() {
             try {
-                Console.WriteLine("Iniciar");
-                new TextUI().Run();
-                Console.WriteLine("Fim");
+                new TextUI(PovoarFacade()).Run();
             }
             catch (Exception e) {
                 Console.WriteLine($"Erro fatal: {e.Message} [{e.ToString}]");
@@ -219,4 +217,5 @@ namespace CantinhoDasEncomendas {
 
     }
 
-} */
+
+}

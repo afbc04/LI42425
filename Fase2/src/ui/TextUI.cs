@@ -12,7 +12,11 @@ namespace ui {
         public TextUI() {
 
             this.Model = new Facade();
-            //scin = new Scanner(System.in);
+        }
+
+        public TextUI(IFacade model) {
+
+            this.Model = model;
         }
 
         public void Run() {
@@ -24,6 +28,7 @@ namespace ui {
         private void MenuPrincipal() {
             TextMenu menu = new TextMenu(new string[]{
                     "Iniciar Sessão",
+                    "Registar",
                     "Recuperar Palavra-Passe"
             });
 
@@ -32,7 +37,9 @@ namespace ui {
             //menu.setPreCondition(4, () => this.model.haTurmasComAlunos());
 
             // Registar os handlers das transições
-            menu.SetHandler(1, () => gestaoDeAlunos());
+            menu.SetHandler(1, () => IniciarSessao());
+            //menu.SetHandler(2, () => RegistarCliente());
+            //menu.SetHandler(3, () => RecuperarPassword());
             //menu.setHandler(2, ()=>gestaoDeTurmas());
             //menu.setHandler(3, ()=>adicionarAlunoATurma());
             //menu.setHandler(4, ()=>removerAlunoDeTurma());
@@ -57,6 +64,12 @@ namespace ui {
             //menu.setHandler(3, ()=>listarAlunos());
 
             menu.Run();
+        }
+
+        private void IniciarSessao() {
+            
+            Console.WriteLine("");
+
         }
 
         /**
