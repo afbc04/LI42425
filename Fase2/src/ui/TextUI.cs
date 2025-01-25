@@ -21,11 +21,57 @@ namespace ui {
 
         public void Run() {
             Console.WriteLine("Bem vindo ao Cantinho das Encomendas!");
-            this.MenuPrincipal();
+            this.Home();
             Console.WriteLine("Até breve...");
         }
 
-        private void MenuPrincipal() {
+        private void Home() {
+            TextMenu menu = new TextMenu(new string[]{
+                    "Iniciar Sessão",
+                    "Registar",
+                    "Recuperar Palavra-Passe"
+            });
+
+            // Registar pré-condições das transições
+            //menu.setPreCondition(3, () => this.model.haAlunos() && this.model.haTurmas());
+            //menu.setPreCondition(4, () => this.model.haTurmasComAlunos());
+
+            // Registar os handlers das transições
+            menu.SetHandler(1, () => IniciarSessao());
+            //menu.SetHandler(2, () => RegistarCliente());
+            //menu.SetHandler(3, () => RecuperarPassword());
+            //menu.setHandler(2, ()=>gestaoDeTurmas());
+            //menu.setHandler(3, ()=>adicionarAlunoATurma());
+            //menu.setHandler(4, ()=>removerAlunoDeTurma());
+            //menu.setHandler(5, ()=>listarAlunosDaTurma());
+
+            menu.Run();
+        }
+
+        private void MenuFuncionario() {
+            TextMenu menu = new TextMenu(new string[]{
+                    "Iniciar Sessão",
+                    "Registar",
+                    "Recuperar Palavra-Passe"
+            });
+
+            // Registar pré-condições das transições
+            //menu.setPreCondition(3, () => this.model.haAlunos() && this.model.haTurmas());
+            //menu.setPreCondition(4, () => this.model.haTurmasComAlunos());
+
+            // Registar os handlers das transições
+            menu.SetHandler(1, () => IniciarSessao());
+            //menu.SetHandler(2, () => RegistarCliente());
+            //menu.SetHandler(3, () => RecuperarPassword());
+            //menu.setHandler(2, ()=>gestaoDeTurmas());
+            //menu.setHandler(3, ()=>adicionarAlunoATurma());
+            //menu.setHandler(4, ()=>removerAlunoDeTurma());
+            //menu.setHandler(5, ()=>listarAlunosDaTurma());
+
+            menu.Run();
+        }
+
+        private void MenuCliente() {
             TextMenu menu = new TextMenu(new string[]{
                     "Iniciar Sessão",
                     "Registar",
@@ -68,7 +114,32 @@ namespace ui {
 
         private void IniciarSessao() {
             
-            Console.WriteLine("");
+            Console.WriteLine("Indique o seu email: ");
+            string? email = Console.ReadLine();
+            Console.WriteLine("Indique a password:");
+            string? password = Console.ReadLine();
+
+            //Sessão Iniciada com Sucesso
+            if (email is not null && password is not null && Model.IniciarSessao(email,password)) {
+
+                Console.Write("Sessão Iniciada com sucesso - ");
+
+                if (Model.isFuncionario()) {
+                    Console.Write("Funcionário\n");
+                    MenuFuncionario();
+                }
+                else {
+                    Console.Write("Cliente\n");
+                    MenuCliente();
+                }
+
+            }
+            else {
+
+                Console.WriteLine("Credênciais Inválidas");
+                Home();
+
+            }
 
         }
 
