@@ -169,6 +169,15 @@ namespace business {
         public ISet<FAQ> GetFAQ() {
             return _faq.GetFAQ();
         }
+
+        public void AddFAQ(string pergunta,string resposta) {
+            _faq.AddFAQ(pergunta,resposta);
+        }
+
+        public void RemoveFAQ(int index) {
+            _faq.RemoveFAQ(index);
+        }
+
         public Encomenda? GetEncomenda(int encomenda) {
             return _encomendas.GetEncomenda(encomenda);
         }

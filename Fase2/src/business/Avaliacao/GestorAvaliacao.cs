@@ -47,11 +47,10 @@ namespace business {
 
         public Avaliacao AddAvaliacao(string autor, int rating, string? comentario) {
 
-            ISet<Avaliacao> lista = _avaliacoes[autor];
-            if (lista is null) {
-                lista = new HashSet<Avaliacao>();
-                _avaliacoes[autor] = lista;
+            if (_avaliacoes.ContainsKey(autor) == false) {
+                _avaliacoes[autor] = new HashSet<Avaliacao>();
             }
+            ISet<Avaliacao> lista = _avaliacoes[autor];
             Avaliacao a = new Avaliacao(autor,rating,comentario);
 
             lista.Add(a);

@@ -13,7 +13,7 @@ namespace business {
             if (value <= 0)
                 _quantidade = 0;
             else
-                Quantidade = value;
+                _quantidade = value;
                 
             }
         }

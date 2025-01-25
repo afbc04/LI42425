@@ -30,6 +30,8 @@ namespace business {
         public void ModifyClienteMorada(string email, string morada);
         public void ModifyClienteTelefone(string email, string telefone);
         public ISet<FAQ> GetFAQ();
+        public void AddFAQ(string pergunta,string resposta);
+        public void RemoveFAQ(int index);
         public Encomenda? GetEncomenda(int encomenda);
         public bool FazerEncomendaProduto(int encomenda, int produto);
         public ISet<Encomenda> GetEncomendasDoing(Filtro? filtro);
