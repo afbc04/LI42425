@@ -1,7 +1,12 @@
 ﻿@page "/registo"
+@inherits LayoutComponentBase
+@inject business.IFacade Facade
+@inject NavigationManager NavigationManager
+@layout Layout.MainLayout
+
 
 <head>
-    <link href="css/autenticacao.css" rel="stylesheet" />
+    <link href="styles.css" rel="stylesheet" />
 </head>
 
 
@@ -34,8 +39,18 @@
     // Método chamado ao submeter o registo
     private void HandleRegister()
     {
-        // ligação á base de dados para guardar os dados recebidos
-        Console.WriteLine($"Registo: {Nome}, {Email}, {Telefone}, {Morada}, {Password}");
+        bool sucesso = Facade.RegistarCliente(Nome, Email, Password, Telefone, Morada);
+        if (sucesso)
+        {
+            // Redirecionar ou mostrar mensagem de sucesso
+            Console.WriteLine("Registo realizado com sucesso!");
+            NavigationManager.NavigateTo("/login");
+        }
+        else
+        {
+            // Mostrar erro
+            Console.WriteLine("Falha no registo. Tente novamente.");
+        }
     }
 }
 
