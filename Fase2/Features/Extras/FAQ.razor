@@ -1,4 +1,6 @@
 ﻿@page "/faq"
+@inject business.IFacade Facade
+@inherits LayoutComponentBase
 @layout Layout.MainLayout
 
 <head>
@@ -7,28 +9,16 @@
 
 <div class="faq-container">
     <h2>Perguntas Frequentes (FAQ)</h2>
-    <!-- Pergunta 1 -->
-    <div class="faq-item">
-        <!-- Cada bloco de pergunta e resposta-->
-        <h3 class="faq-question">Como faço para criar uma conta?</h3>
-        <p class="faq-answer">Para criar uma conta, clique em "Área Pessoal" no menu e depois selecione "Criar Conta". Preencha os dados solicitados e finalize o seu registo.</p>
+    <div class="menu-tartes">
+        @* Gera os links dinamicamente a partir do Facade *@
+        @foreach (var faq in Facade.GetFAQ())
+        {
+            <div class= "faq-item">
+                <h3 class="faq-question"> @faq.Pergunta
+                <p class="faq-answer"> @faq.Resposta</p>
+                </h3>
+            </div>
+        }
     </div>
 
-    <!-- Pergunta 2 -->
-    <div class="faq-item">
-        <h3 class="faq-question">Como posso ver os meus favoritos?</h3>
-        <p class="faq-answer">No menu horizontal, no topo da página, clique em "Favoritos".</p>
-    </div>
-
-    <!-- Pergunta 3 -->
-    <div class="faq-item">
-        <h3 class="faq-question">Como posso modificar meus dados pessoais?</h3>
-        <p class="faq-answer">Após fazer login na sua conta, acesse a opção "Dados Pessoais" na sua área pessoal. Lá, poderá editar os seus dados.</p>
-    </div>
-
-    <!-- Pergunta 4 -->
-    <div class="faq-item">
-        <h3 class="faq-question">O que devo fazer se uma tarte estiver sem stock?</h3>
-        <p class="faq-answer">Pode pedir para receber um email, avisando que a tarte está novamente disponível.</p>
-    </div>
 </div>
