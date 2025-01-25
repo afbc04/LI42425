@@ -9,6 +9,8 @@ namespace business {
         private IGestorEncomendas _encomendas;
         private IGestorUtilizadores _utilizadores;
 
+        private string? email;
+
         public Facade() {
 
             _faq = new GestorFAQ();
@@ -17,20 +19,36 @@ namespace business {
             _stock = new Stock();
             _encomendas = new GestorEncomendas();
             _utilizadores = new GestorUtilizadores();
+            email = null;
 
         }
 
-        public bool isFuncionario(string email) {
-            return _utilizadores.isFuncionario(email);
+        public bool isFuncionario() {
+            if (email is not null)
+                return _utilizadores.isFuncionario(email);
+            else
+                return false;
         }
 
-        //FIXME:
+        public bool SessaoIniciada() {
+            return this.email != null;
+        }
+
+        public string? GetEmailLogin() {
+            return email;
+        }
+
         public bool IniciarSessao(string email, string senha) {
-            return _utilizadores.ValidarSessao(email,senha);
+            bool res = _utilizadores.ValidarSessao(email,senha);
+            if (res)
+                this.email = email;
+            
+            return res;
         }
-        //FIXME:
+
         public bool TerminarSessao() {
-            return false;
+            this.email = null;
+            return true;
         }
 
         public bool RegistarCliente(string email, string nome, string senha, string? tele, string? morada) {

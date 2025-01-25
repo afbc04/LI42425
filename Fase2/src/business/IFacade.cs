@@ -2,12 +2,12 @@ namespace business {
 
     public interface IFacade {
 
-        public bool isFuncionario(string email);
-        //FIXME:
+        public bool SessaoIniciada();
+        public string? GetEmailLogin();
+        public bool isFuncionario();
         public bool IniciarSessao(string email, string senha);
         public bool TerminarSessao();
 
-        //TODO:
         public bool RegistarCliente(string email, string nome, string senha, string? tele, string? morada);
         public bool RegistarFuncionario(string email, string nome, string senha);
         public bool AlterarSenha(string email, string senha);
