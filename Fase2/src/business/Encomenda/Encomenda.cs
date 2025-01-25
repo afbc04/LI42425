@@ -99,7 +99,7 @@ namespace business {
 
             EncomendaUnidade u = _produtos[index];
 
-            if (u.Finalizado == false) {
+            if (u.Finalizado == false && u.Iniciado == true) {
 
                 u.AtualizarProgresso();
                 string? novo_progresso = u.ProcedimentoAtual;

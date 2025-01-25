@@ -95,6 +95,19 @@ namespace business {
 
         }
 
+        public bool TemMaterialSuficiente(ISet<Material> materiais) {
+
+            foreach (Material m in materiais) {
+
+                if (m.Quantidade > _materiais[m.Tipo].Quantidade)
+                    return false;
+
+            }
+
+            return true;
+
+        }
+
         public bool ProduzirProduto(Produto produto) {
 
             if (ConsegueProduzir(produto) == false)
@@ -107,6 +120,25 @@ namespace business {
             }
 
             return true;
+
+        }
+
+        public ISet<Material> GetMaterialBaixoStock() {
+
+            ISet<Material> lista = new HashSet<Material>();
+
+            foreach (string s in _materiais.Keys) {
+
+                StockEntry e = _materiais[s];
+                float perc = e.Quantidade / e.QuantidadeMaxima;
+
+                if (perc <= 0.1) {
+                    lista.Add(new Material(s,e.Quantidade));
+                }
+
+            }
+
+            return lista;
 
         }
 

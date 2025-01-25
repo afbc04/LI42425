@@ -123,12 +123,41 @@ namespace business {
             Interrompido = false;
         }
 
+        public EncomendaUnidade? GetEncomendaProduto(int encomenda, int produto) {
+            return _encomendas[encomenda].Produtos[produto].Clone();
+        }
+
+        public void IniciarEncomendaProduto(int encomenda, int produto) {
+            _encomendas[encomenda].Produtos[produto].Iniciar();
+        }
+
         public void AtualizarEstadoEncomenda(int encomenda) {
             _encomendas[encomenda].AtualizarEstadoEncomenda();
         }
         
         public void AtualizarProgressoEncomenda(int encomenda, int produto) {
             _encomendas[encomenda].AtualizarProgressoEncomenda(produto);
+        }
+
+        public void AddEncomendaCarrinhoCompras(string cliente, CarrinhoCompras carrinhoCompras, IDictionary<string,Produto> produtos) {
+
+            IList<Produto> lista = new List<Produto>();
+
+            foreach((string p, int q) in carrinhoCompras.Produtos) {
+
+                int quantidade = q;
+
+                while (quantidade > 0) {
+                    lista.Add(produtos[p]);
+                    quantidade--;
+                }
+
+            }
+
+            Encomenda e = new Encomenda(_encomenda_Numero,lista,cliente);
+            _encomenda_Numero++;
+            _encomendas[e.ID] = e;
+
         }
 
     }

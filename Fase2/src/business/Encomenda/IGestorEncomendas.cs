@@ -10,8 +10,11 @@ namespace business {
         public Relatorio? GetEncomendaRelatorio(int encomenda);
         public void InterromperEncomendas();
         public void RetomarEncomendas();
+        public EncomendaUnidade? GetEncomendaProduto(int encomenda,int produto);
+        public void IniciarEncomendaProduto(int encomenda,int produto);
         public void AtualizarEstadoEncomenda(int encomenda);
         public void AtualizarProgressoEncomenda(int encomenda, int produto);
+        public void AddEncomendaCarrinhoCompras(string cliente, CarrinhoCompras carrinhoCompras, IDictionary<string,Produto> produtos);
 
     }
 

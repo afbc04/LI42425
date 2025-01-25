@@ -89,6 +89,52 @@ namespace business {
             return p;
         }
 
+        public ISet<Material> GetMaterialCarrinhoCompras(CarrinhoCompras carrinhoCompras) {
+
+            IDictionary<string,int> map = new Dictionary<string,int>();
+
+            foreach ((string s, int i) in carrinhoCompras.Produtos) {
+
+                Produto p = _produtos[s];
+
+                foreach(Material m in p.Materiais) {
+
+                    if (map.ContainsKey(m.Tipo)) {
+                        map[m.Tipo] += m.Quantidade;
+                    }
+                    else {
+                        map[m.Tipo] = m.Quantidade;
+                    }
+
+                }
+
+            }
+
+            ISet<Material> lista = new HashSet<Material>();
+            foreach(string s in map.Keys) {
+
+                lista.Add(new Material(s,map[s]));
+
+            }
+
+            return lista;
+
+        }
+
+        public ISet<Produto> GetProdutosCarrinhoCompras(CarrinhoCompras carrinhoCompras) {
+
+            ISet<Produto> lista = new HashSet<Produto>();
+
+            foreach ((string s, int i) in carrinhoCompras.Produtos) {
+
+                Produto p = _produtos[s];
+                lista.Add(p.Clone());
+            }
+
+            return lista;
+
+        }
+
 
     }
 

@@ -65,9 +65,28 @@ namespace business {
             _utilizadores.RemoveProdutoCarrinhoCompras(email,produto);
         }
 
+        public bool ConseguePagarEncomenda(string email) {
+            return _stock.TemMaterialSuficiente(_produtos.GetMaterialCarrinhoCompras(_utilizadores.ObterCarrinhoCompras(email)));
+        }
+
         public bool PagarEncomenda(string email) {
-            //TODO:
-            return false;
+            
+            CarrinhoCompras carrinhoCompras = _utilizadores.ObterCarrinhoCompras(email);
+
+            if (_stock.TemMaterialSuficiente(_produtos.GetMaterialCarrinhoCompras(carrinhoCompras))) {
+
+                IDictionary<string,Produto> lista = new Dictionary<string,Produto>();
+                foreach (Produto p in _produtos.GetProdutosCarrinhoCompras(carrinhoCompras)) {
+                    lista[p.Id] = p;
+                }
+
+                _encomendas.AddEncomendaCarrinhoCompras(email,carrinhoCompras,lista);
+                return true;
+            }
+            else {
+                return false;
+            }
+
         }
 
         public bool CancelarEncomenda(int encomenda) {
@@ -135,6 +154,28 @@ namespace business {
         public Encomenda? GetEncomenda(int encomenda) {
             return _encomendas.GetEncomenda(encomenda);
         }
+
+        public bool FazerEncomendaProduto(int encomenda, int produto) {
+
+            EncomendaUnidade? e = _encomendas.GetEncomendaProduto(encomenda,produto);
+
+            if (e is not null) {
+
+                if (_stock.ProduzirProduto(e.Produto)) {
+                    _encomendas.IniciarEncomendaProduto(encomenda,produto);
+                    return true;
+                }
+                else {
+                    return false;
+                }
+
+            }
+            else {
+                return false;
+            }
+
+        }
+
         public ISet<Encomenda> GetEncomendasDoing(Filtro? filtro) {
             return _encomendas.GetEncomendasDoing(filtro);
         }
@@ -147,6 +188,11 @@ namespace business {
         public ISet<Material> VerStock() {
             return _stock.GetStock();
         }
+
+        public ISet<Material> GetMaterialBaixoStock() {
+            return _stock.GetMaterialBaixoStock();
+        }
+
         public Relatorio? GetEncomendaRelatorio(int encomenda) {
             return _encomendas.GetEncomendaRelatorio(encomenda);
         }

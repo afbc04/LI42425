@@ -24,13 +24,14 @@ namespace business {
         public void AddProdutoFavoritos(string email, string produto);
         public void RemoveProdutoFavoritos(string email, string produto);
         public ListaDeFavoritos GetFavoritos(string email);
-        //TODO: receber notificação em caso de stock
+        public bool ConseguePagarEncomenda(string email);
         public void ModifyClienteNome(string email, string nome);
         public bool ModifyClienteEmail(string email, string novo_email);
         public void ModifyClienteMorada(string email, string morada);
         public void ModifyClienteTelefone(string email, string telefone);
         public ISet<FAQ> GetFAQ();
         public Encomenda? GetEncomenda(int encomenda);
+        public bool FazerEncomendaProduto(int encomenda, int produto);
         public ISet<Encomenda> GetEncomendasDoing(Filtro? filtro);
         public ISet<Encomenda> GetEncomendasDone(Filtro? filtro);
         public ISet<Encomenda> GetEncomendasQueue(Filtro? filtro);
@@ -38,11 +39,10 @@ namespace business {
         public Relatorio? GetEncomendaRelatorio(int encomenda);
         public void InterromperEncomendas();
         public void RetomarEncomendas();
-        //FIXME:
         public void AtualizarEstadoEncomenda(int encomenda);
         public void AtualizarProgressoEncomenda(int encomenda, int produto);
         public void SetCapMaxMaterial(string material, int capacidadeMax);
-        //TODO: public void Notificar Funcionario
+        public ISet<Material> GetMaterialBaixoStock();
         public void SetMaterialQuantidade(string material, int quantidade);
         public void AddMaterialStock(string material, int quantidade_max);
         public void RemoveMaterialStock(string material);

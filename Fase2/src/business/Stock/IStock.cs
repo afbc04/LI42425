@@ -15,7 +15,8 @@ namespace business {
         public void ModifyMaterialQuantidadeMaxima(string material, int max);
         public bool ConsegueProduzir(Produto produto);
         public bool ProduzirProduto(Produto produto);
-
+        public bool TemMaterialSuficiente(ISet<Material> materiais);
+        public ISet<Material> GetMaterialBaixoStock();
 
     }
 

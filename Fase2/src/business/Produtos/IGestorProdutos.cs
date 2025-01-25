@@ -19,6 +19,9 @@ namespace business {
 
         public ISet<Produto> GetProdutos();
         public Produto? GetProduto(string id);
+        public ISet<Material> GetMaterialCarrinhoCompras(CarrinhoCompras carrinhoCompras);
+        public ISet<Produto> GetProdutosCarrinhoCompras(CarrinhoCompras carrinhoCompras);
+
     }
 
 
