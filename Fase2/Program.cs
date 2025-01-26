@@ -116,7 +116,7 @@ namespace CantinhoDasEncomendas
                     materiais.Add(new Material("Ovo",3));
                     materiais.Add(new Material("Farinha",300));
                     materiais.Add(new Material("Maçã",1));
-                    model.AddTarte("maca", "Tarte de Maçã", 8.00f, "images/tarte_maca.png", "Uma deliciosa tarte de maçã com um toque de canela e crocância. Cada fatia é um abraço de conforto. É o ideal para acompanhar uma chávena de chá num dia frio.", materiais, procedimentos);
+                    model.AddTarte("maca", "Tarte de Maçã", 8.00f, "images/tarte_maca.png", "Uma deliciosa tarte de maçã com um toque de canela e crocância que faz recordar o Outono, a estação favorita da criadora destas receitas maravilhosas. Cada fatia é um abraço de conforto. É o ideal para acompanhar uma chávena de chá num dia frio.", materiais, procedimentos);
 
                     //Rosas
                     procedimentos.Clear();
@@ -128,7 +128,7 @@ namespace CantinhoDasEncomendas
                     materiais.Add(new Material("Ovo",4));
                     materiais.Add(new Material("Farinha",400));
                     materiais.Add(new Material("Rosas",3));
-                    model.AddTarte("rosas", "Tarte Rosas", 7.00f, "images/tarte_rosa.png", "Imagine fatias finas de fruta cuidadosamente moldadas para formar as deslumbrantes rosas. Em baixo destas rosas, encontra-se um recheio suave e cremoso. É a sobremesa ideal para destacar numa mesa", materiais, procedimentos);
+                    model.AddTarte("rosas", "Tarte Rosas", 7.00f, "images/tarte_rosas.png", "Uma refrescante tarte de limão. Em baixo do topo macio em formato de rosas, encontra-se um recheio suave e cremoso. É a sobremesa ideal para destacar numa mesa.", materiais, procedimentos);
 
                     //Mirtilo
                     procedimentos.Clear();
@@ -153,7 +153,7 @@ namespace CantinhoDasEncomendas
                     materiais.Add(new Material("Ovo",3));
                     materiais.Add(new Material("Farinha",250));
                     materiais.Add(new Material("Framboesa",7));
-                    model.AddTarte("framboesa", "Tarte de Framboesa", 8.00f, "images/tarte_framboesa.png", "Esta é mais uma tarte onde cada fatia traz uma explosão deliciosa de sabores. É ainda melhor quando acompanhada com uma bola de gelado.", materiais, procedimentos);
+                    model.AddTarte("framboesa", "Tarte de Framboesa", 8.00f, "images/tarte_framboesa.png", "Essencialmente feita de framboesa, é uma tarte onde cada fatia traz uma explosão deliciosa de sabores. É ainda melhor quando acompanhada com uma bola de gelado.", materiais, procedimentos);
 
                     //Chocolate
                     procedimentos.Clear();
@@ -177,7 +177,7 @@ namespace CantinhoDasEncomendas
                     materiais.Clear();
                     materiais.Add(new Material("Leite",300));
                     materiais.Add(new Material("Mandala",1));
-                    model.AddTarte("mandala", "Tarte Mandala", 8.00f, "images/tarte_mandala.png", "Uma simples e saborosa tarte que lembra a primavera. A perfeita combinação de sabores no recheio e o bonito desenho no topo fazem desta tarte única e especial", materiais, procedimentos);
+                    model.AddTarte("mandala", "Tarte Folhas", 8.00f, "images/tarte_mandala.png", "Uma bonita e saborosa tarte com uns bordados em forma de folha. A perfeita combinação de sabores no recheio e o bonito desenho no topo fazem desta tarte única e especial.", materiais, procedimentos);
                 
                 //FAQ
                 model.AddFAQ("Como faço para criar uma conta?","Para criar uma conta, clique em \"Área Pessoal\" no menu e depois selecione \"Criar Conta\". Preencha os dados solicitados e finalize o seu registo.");
