@@ -1,6 +1,6 @@
 ﻿@page "/tarte/{NomeTarte}"
 @inject business.IFacade Facade
-@inject business.CarrinhoCompras Carrinhos
+@inject NavigationManager NavigationManager
 @inherits LayoutComponentBase
 @layout Layout.MainLayout
 
@@ -26,7 +26,16 @@
     {
         if (ProdutoSelecionado is not null)
         {
-            Carrinhos.AddProduto(ProdutoSelecionado.Nome);
+            var email = Facade.GetEmailLogin(); // Obtém o e-mail do utilizador autenticado
+
+            if (!string.IsNullOrEmpty(email))
+            {
+                Facade.AddProdutoCarrinhoCompras(email, ProdutoSelecionado.Nome); // Adiciona o produto ao carrinho
+            }
+            else
+            {
+                NavigationManager.NavigateTo("/login"); // Redireciona para o login se não estiver autenticado
+            }
         }
     }
 }

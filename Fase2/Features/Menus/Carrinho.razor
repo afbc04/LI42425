@@ -1,7 +1,8 @@
 ﻿@page "/carrinho"
-@inject business.CarrinhoCompras Carrinhos
+@inject business.IFacade Facade
 @inherits LayoutComponentBase
 @layout Layout.MainLayout
+
 
 <head>
     <link href="css/carrinho.css" rel="stylesheet" />
@@ -9,14 +10,22 @@
 
 <div class="carrinho">
     <h1 class="titulo">O Meu Carrinho:</h1>
-    @if (Carrinhos.Size() == 0)
+    @if (!Facade.SessaoIniciada())
     {
-        <h2 class="subtitulo"> O carrinho está vazio.</h2>
+        <h2 class="subtitulo">É necessário iniciar sessão para acessar o carrinho.</h2>
+        <div class="container-botao">
+            <NavLink href="/login" class="botao-login">Ir para o Login</NavLink>
+        </div>
+
+    }
+    else if (!ProdutosCarrinho.Any())
+    {
+        <h2 class="subtitulo">O carrinho está vazio.</h2>
     }
     else
     {
         <div class="itens-carrinho">
-            @foreach (var (nomeProduto, quantidade) in Carrinhos.GetProdutos())
+            @foreach (var (nomeProduto, quantidade) in ProdutosCarrinho)
             {
                 <div class="item-carrinho">
                     <div class="info-produto">
@@ -33,26 +42,67 @@
             <h3>Total: @TotalProdutos() produtos</h3>
         </div>
     }
-    <div class="container-botao">
+    @*
+    <div class="container-botao2">
         <button class="botao-voltar" @onclick="Voltar">← Voltar ao menu</button>
     </div>
+    *@
 </div>
 
 @code {
+    private IDictionary<string, int> ProdutosCarrinho = new Dictionary<string, int>();
+
+    protected override void OnInitialized()
+    {
+        CarregarCarrinho();
+    }
+
+    private void CarregarCarrinho()
+    {
+        if (Facade.SessaoIniciada())
+        {
+            var email = Facade.GetEmailLogin();
+            if (!string.IsNullOrEmpty(email))
+            {
+                var carrinho = Facade.ObterCarrinhoCompras(email);
+                ProdutosCarrinho = carrinho.GetProdutos()
+                                           .ToDictionary(item => item.Item1, item => item.Item2);
+            }
+            else
+            {
+                ProdutosCarrinho = new Dictionary<string, int>();
+            }
+        }
+    }
+
 
     private void RemoverDoCarrinho(string nomeProduto)
     {
-        Carrinhos.RemoveProduto(nomeProduto);
+        if (Facade.SessaoIniciada())
+        {
+            var email = Facade.GetEmailLogin();
+            if (!string.IsNullOrEmpty(email))
+            {
+                Facade.RemoveProdutoCarrinhoCompras(email, nomeProduto);
+                CarregarCarrinho(); // Recarrega o carrinho para refletir a mudança
+            }
+            else
+            {
+                // Pode exibir uma mensagem ao usuário ou fazer algum tratamento adicional
+                Console.WriteLine("Erro: Email não encontrado.");
+            }
+        }
+        else
+        {
+            // Caso a sessão não esteja iniciada, pode redirecionar ou exibir um alerta
+            Console.WriteLine("Erro: Sessão não iniciada.");
+        }
     }
+
 
     private int TotalProdutos()
     {
-        int total = 0;
-        foreach (var (_, quantidade) in Carrinhos.GetProdutos())
-        {
-            total += quantidade;
-        }
-        return total;
+        return ProdutosCarrinho.Values.Sum();
     }
 
     private void Voltar()
@@ -61,5 +111,5 @@
     }
 
     [Inject]
-    private NavigationManager NavigationManager { get; set;} = null!;
+    private NavigationManager NavigationManager { get; set; } = null!;
 }
