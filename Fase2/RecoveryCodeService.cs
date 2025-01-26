@@ -11,7 +11,7 @@ public class RecoveryCodeService
     }
 
     // Tenta obter o código associado a um email
-    public bool TryGetCode(string email, out string code)
+    public bool TryGetCode(string email, out string? code)
     {
         return _codeStorage.TryGetValue(email, out code);
     }

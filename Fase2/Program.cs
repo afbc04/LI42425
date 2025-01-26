@@ -34,8 +34,6 @@ namespace CantinhoDasEncomendas
             //    senderPassword: "suasenha"
             //));
 
-            Console.WriteLine("TESTE");
-
             //builder.Services.AddSingleton<RecoveryCodeService>();
 
             // Add services to the container.
