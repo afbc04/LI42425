@@ -1,0 +1,65 @@
+﻿@page "/carrinho"
+@inject business.CarrinhoCompras Carrinhos
+@inherits LayoutComponentBase
+@layout Layout.MainLayout
+
+<head>
+    <link href="css/carrinho.css" rel="stylesheet" />
+</head>
+
+<div class="carrinho">
+    <h1 class="titulo">O Meu Carrinho:</h1>
+    @if (Carrinhos.Size() == 0)
+    {
+        <h2 class="subtitulo"> O carrinho está vazio.</h2>
+    }
+    else
+    {
+        <div class="itens-carrinho">
+            @foreach (var (nomeProduto, quantidade) in Carrinhos.GetProdutos())
+            {
+                <div class="item-carrinho">
+                    <div class="info-produto">
+                        <p>@nomeProduto</p>
+                        <p>Quantidade: @quantidade</p>
+                    </div>
+                    <button class="btn-lixo" @onclick="() => RemoverDoCarrinho(nomeProduto)">
+                        🗑️
+                    </button>
+                </div>
+            }
+        </div>
+        <div class="total">
+            <h3>Total: @TotalProdutos() produtos</h3>
+        </div>
+    }
+    <div class="container-botao">
+        <button class="botao-voltar" @onclick="Voltar">← Voltar ao menu</button>
+    </div>
+</div>
+
+@code {
+
+    private void RemoverDoCarrinho(string nomeProduto)
+    {
+        Carrinhos.RemoveProduto(nomeProduto);
+    }
+
+    private int TotalProdutos()
+    {
+        int total = 0;
+        foreach (var (_, quantidade) in Carrinhos.GetProdutos())
+        {
+            total += quantidade;
+        }
+        return total;
+    }
+
+    private void Voltar()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+
+    [Inject]
+    private NavigationManager NavigationManager { get; set; }
+}

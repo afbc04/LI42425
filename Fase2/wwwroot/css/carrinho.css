@@ -1,0 +1,53 @@
+﻿.titulo {
+    font-family: 'Dancing Script', cursive;
+    font-size: 36px;
+    font-weight: bold;
+    color: #D97971;
+    margin: 40px auto 20px;
+    text-align: center;
+}
+
+.subtitulo {
+    font-family: 'Dancing Script', cursive;
+    font-size: 25px;
+    font-weight: bold;
+    color: rgba(217, 121, 113, 0.6);
+    margin: 30px auto 40px;
+    text-align: center;
+}
+
+.container-botao {
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    height: 100vh; /* Define altura do contêiner como 100% da altura da tela */
+}
+
+
+.itens-carrinho {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.item-carrinho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.btn-lixo {
+    background: transparent;
+    border: none;
+    color: #f44336;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+    .btn-lixo:hover {
+        color: #d32f2f;
+    }

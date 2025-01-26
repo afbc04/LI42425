@@ -1,5 +1,6 @@
 ﻿@page "/tarte/{NomeTarte}"
 @inject business.IFacade Facade
+@inject business.CarrinhoCompras Carrinhos
 @inherits LayoutComponentBase
 @layout Layout.MainLayout
 
@@ -20,6 +21,14 @@
         // Procura o produto correspondente ao NomeTarte (id pode ser maca ou rosas por exemplo)
         ProdutoSelecionado = Facade.ObterTarte(NomeTarte.ToLower());
     }
+
+    private void AdicionarAoCarrinho()
+    {
+        if (ProdutoSelecionado is not null)
+        {
+            Carrinhos.AddProduto(ProdutoSelecionado.Nome);
+        }
+    }
 }
 
 <div class="tarte-detalhes">
@@ -29,7 +38,7 @@
         <img src="@ProdutoSelecionado.Imagem" alt="@ProdutoSelecionado.Nome" />
         <p class="preco">@ProdutoSelecionado.Preco.ToString("C")</p>
         <p>@ProdutoSelecionado.Descricao</p>
-        <button class="botao-carrinho">Adicionar ao Carrinho</button>
+        <button class="botao-carrinho" @onclick="AdicionarAoCarrinho">Adicionar ao Carrinho</button>
         <NavLink href="/" class="a-voltarMenu">Voltar ao menu</NavLink>
     }
     else // não encontrou a tarte
@@ -39,3 +48,4 @@
         <NavLink href="/" class="a-voltarMenu">Voltar ao menu</NavLink>
     }
 </div>
+

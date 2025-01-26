@@ -20,6 +20,9 @@ namespace CantinhoDasEncomendas
 
             var builder = WebApplication.CreateBuilder(args);
 
+            // Registrar CarrinhoCompras como Singleton para manter a mesma instância em toda a aplicação
+            builder.Services.AddSingleton<CarrinhoCompras>();
+
             //� singleton porque deve ser unico para toda a aplica��o de modo a evitar inconsist�ncia de dados
             // Registra o GestorProdutos como um servi�o Singleton
             builder.Services.AddSingleton<IFacade, Facade>(sp => PovoarFacade());
@@ -62,6 +65,7 @@ namespace CantinhoDasEncomendas
 
         }
         
+
         //Método teste que povoa o Facade
         private static Facade PovoarFacade() {
 
@@ -206,6 +210,7 @@ namespace CantinhoDasEncomendas
 
         }
 
+
         public static void CantinhoDasEncomendasTxt() {
             try {
                 new TextUI(PovoarFacade()).Run();
@@ -214,7 +219,7 @@ namespace CantinhoDasEncomendas
                 Console.WriteLine($"Erro fatal: {e.Message} [{e.ToString}]");
             }
         }
-
+    
     }
 
 
