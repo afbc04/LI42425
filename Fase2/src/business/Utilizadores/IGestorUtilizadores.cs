@@ -20,6 +20,8 @@ namespace business {
         public bool ModifyClienteEmail(string email, string novo_email);
         public void ModifyClienteMorada(string email, string morada);
         public void ModifyClienteTelefone(string email, string telefone);
+        public Utilizador? GetUtilizador(string email);
+        public void EsvaziaCarrinhoCompras(string email);
 
     }
 

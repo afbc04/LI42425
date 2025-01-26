@@ -128,11 +128,11 @@ namespace business {
         }
 
         public EncomendaUnidade? GetEncomendaProduto(int encomenda, int produto) {
-            return _encomendas[encomenda].Produtos[produto].Clone();
+            return _encomendas[encomenda].Produtos[produto-1].Clone();
         }
 
         public void IniciarEncomendaProduto(int encomenda, int produto) {
-            _encomendas[encomenda].Produtos[produto].Iniciar();
+            _encomendas[encomenda].IniciarProduto(produto-1);
         }
 
         public void AtualizarEstadoEncomenda(int encomenda) {
@@ -140,10 +140,10 @@ namespace business {
         }
         
         public void AtualizarProgressoEncomenda(int encomenda, int produto) {
-            _encomendas[encomenda].AtualizarProgressoEncomenda(produto);
+            _encomendas[encomenda].AtualizarProgressoEncomenda(produto-1);
         }
 
-        public void AddEncomendaCarrinhoCompras(string cliente, CarrinhoCompras carrinhoCompras, IDictionary<string,Produto> produtos) {
+        public int AddEncomendaCarrinhoCompras(string cliente, CarrinhoCompras carrinhoCompras, IDictionary<string,Produto> produtos) {
 
             IList<Produto> lista = new List<Produto>();
 
@@ -161,6 +161,8 @@ namespace business {
             Encomenda e = new Encomenda(_encomenda_Numero,lista,cliente);
             _encomenda_Numero++;
             _encomendas[e.ID] = e;
+
+            return e.ID;
 
         }
 

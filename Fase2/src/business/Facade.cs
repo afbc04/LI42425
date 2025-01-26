@@ -99,7 +99,9 @@ namespace business {
                     lista[p.Id] = p;
                 }
 
-                _encomendas.AddEncomendaCarrinhoCompras(email,carrinhoCompras,lista);
+                int encomendaID = _encomendas.AddEncomendaCarrinhoCompras(email,carrinhoCompras,lista);
+                _utilizadores.AddEncomenda(email,encomendaID);
+                _utilizadores.EsvaziaCarrinhoCompras(email);
                 return true;
             }
             else {
@@ -158,7 +160,11 @@ namespace business {
         }
 
         public bool ModifyClienteEmail(string email, string novo_email) {
-            return _utilizadores.ModifyClienteEmail(email,novo_email);
+            bool res = _utilizadores.ModifyClienteEmail(email,novo_email);
+            if (res == true && this.email == email)
+                this.email = novo_email;
+
+            return res;
         }
 
         public void ModifyClienteMorada(string email, string morada) {
@@ -256,6 +262,9 @@ namespace business {
         }
         public bool MaterialExiste(string material) {
             return _stock.MaterialExiste(material);
+        }
+        public Utilizador? GetUtilizador(string email) {
+            return _utilizadores.GetUtilizador(email);
         }
         
         //UI

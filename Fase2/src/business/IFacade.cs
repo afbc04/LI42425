@@ -51,6 +51,7 @@ namespace business {
         public void AddTarte(string id, string nome, float preco, string? imagem, string? descricao, ISet<Material> materiais, IList<string> procedimentos);
         public void RemoveTarte(string id);
         public bool MaterialExiste(string material);
+        public Utilizador? GetUtilizador(string email);
 
         //UI
         public bool ProducaoInterrompida();

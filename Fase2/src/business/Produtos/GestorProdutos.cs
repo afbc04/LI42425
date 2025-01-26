@@ -85,8 +85,11 @@ namespace business {
             return Produtos;
         }
         public Produto? GetProduto(string id) {
-            Produto? p = _produtos[id];
-            return p;
+
+            if (_produtos.ContainsKey(id))
+                return  _produtos[id];
+            else
+                return null;
         }
 
         public ISet<Material> GetMaterialCarrinhoCompras(CarrinhoCompras carrinhoCompras) {

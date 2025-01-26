@@ -34,18 +34,10 @@ namespace ui {
                     "Recuperar Palavra-Passe"
             });
 
-            // Registar pré-condições das transições
-            //menu.setPreCondition(3, () => this.model.haAlunos() && this.model.haTurmas());
-            //menu.setPreCondition(4, () => this.model.haTurmasComAlunos());
-
             // Registar os handlers das transições
             menu.SetHandler(1, () => IniciarSessao());
-            //menu.SetHandler(2, () => RegistarCliente());
-            //menu.SetHandler(3, () => RecuperarPassword());
-            //menu.setHandler(2, ()=>gestaoDeTurmas());
-            //menu.setHandler(3, ()=>adicionarAlunoATurma());
-            //menu.setHandler(4, ()=>removerAlunoDeTurma());
-            //menu.setHandler(5, ()=>listarAlunosDaTurma());
+            menu.SetHandler(2, () => RegistarCliente());
+            menu.SetHandler(3, () => RecuperarSenha());
 
             menu.RunOnce();
         }
@@ -158,6 +150,8 @@ namespace ui {
 
             TextMenu menu = new TextMenu(opcoes);
 
+            menu.SetPreCondition(6, () => false);
+
             // Registar os handlers das transições
             menu.SetHandler(1, () => VerProdutos());
             menu.SetHandler(2, () => VerCarrinho());
@@ -171,32 +165,14 @@ namespace ui {
             menu.SetHandler(10, () => VerMinhasEncomendas());
             menu.SetHandler(11, () => CancelarEncomenda());
             menu.SetHandler(12, () => VerPreparacaoEncomenda());
-            //menu.SetHandler(13, () => VerDadosPessoais());
+            menu.SetHandler(13, () => VerDadosPessoais());
             menu.SetHandler(14, () => ModificarDadosPessoais());
             menu.SetHandler(15, () => VerAvaliacoes());
             menu.SetHandler(16, () => FazerAvaliacao());
             menu.SetHandler(17, () => VerFAQ());
             menu.SetHandler(18, () => TerminarSessao());
 
-            menu.Run();
-        }
-
-        /**
-         *  Estado - Gestão de Alunos
-         */
-        private void gestaoDeAlunos() {
-            TextMenu menu = new TextMenu("Gestão de Alunos", new string[]{
-                    "Adicionar Aluno",
-                    "Consultar Aluno",
-                    "Listar Alunos"
-            });
-
-            // Registar os handlers
-            //menu.setHandler(1, ()=>adicionarAluno());
-            //menu.setHandler(2, ()=>consultarAluno());
-            //menu.setHandler(3, ()=>listarAlunos());
-
-            menu.Run();
+            menu.RunOnce();
         }
 
         //Iniciar Sessão
@@ -228,6 +204,85 @@ namespace ui {
                 Home();
 
             }
+
+        }
+
+        //Regista um cliente no sistema
+        private void RegistarCliente() {
+
+            Console.WriteLine("Indique qual o seu nome:");
+            string? nome = Console.ReadLine();
+            Console.WriteLine("Indique qual o seu email:");
+            string? email = Console.ReadLine();
+            Console.WriteLine("Indique qual a sua palavra-passe");
+            string? senha = Console.ReadLine();
+            Console.WriteLine("Indique o seu número de telemovel: (opcional)");
+            string? telemovel = Console.ReadLine();
+            Console.WriteLine("Indique a sua morada: (opcional)");
+            string? morada = Console.ReadLine();
+
+            if (nome is not null && email is not null && senha is not null) {
+
+                if (Model.RegistarCliente(email,nome,senha,telemovel,morada)) {
+
+                    Console.WriteLine("Cliente registado com sucesso!");
+
+                    Model.IniciarSessao(email,senha);
+                    Console.Write("Sessão Iniciada com sucesso - ");
+
+                    if (Model.isFuncionario()) {
+                        Console.Write("Funcionário\n");
+                        MenuFuncionario();
+                    }
+                    else {
+                        Console.Write("Cliente\n");
+                        MenuCliente();
+                    }
+
+                }
+                else {
+                    Console.WriteLine("Cliente já existe com esse email");
+                    Home();
+                }
+
+            }
+            else {
+                Console.WriteLine("Indique dados válido");
+                Home();
+            }
+
+        }
+
+        //Altera a senha de um email
+        private void RecuperarSenha() {
+
+            Console.WriteLine("[AVISO] Modo de demonstração!");
+            Console.WriteLine("Indique qual o email que pretende alterar a senha:");
+            string? email = Console.ReadLine();
+
+            if (email is not null) {
+
+                Console.WriteLine("Indique qual a nova palavra-passe:");
+                string? password = Console.ReadLine();
+
+                if (password is not null) {
+
+                    if (Model.AlterarSenha(email,password))
+                        Console.WriteLine("Palavra-passe do email " + email + " alterada com sucesso");
+                    else
+                        Console.WriteLine("Ocorreu um erro durante a mudança de palavra-passe");
+
+                }
+                else {
+                    Console.WriteLine("Indique uma palavra-passe válida");
+                }
+
+            }
+            else {
+                Console.WriteLine("Indique um email válido");
+            }
+
+            Home();
 
         }
 
@@ -725,11 +780,11 @@ namespace ui {
                     foreach(EncomendaUnidade u in e.Produtos) {
                         
                         Console.Write(" - " + u.Produto.Nome);
-                        if (u.Finalizado) {
+                        if (u.Finalizado == true) {
                             Console.Write(" (FEITO)\n");
                         }
                         else {
-                            if (u.Iniciado && u.ProcedimentoAtual is not null) {
+                            if (u.Iniciado == true) {
                                 Console.Write(" (EM PRODUÇÃO) : " + u.ProcedimentoAtual + "\n");
                             }
                             else {
@@ -990,10 +1045,11 @@ namespace ui {
 
                 if (produtos.Count() > 0) {
                     
+                    Console.WriteLine("Carrinho de compras:");
                     foreach (var (id, quantidade) in produtos) {
                         Produto? p = Model.ObterTarte(id);
                         if(p != null) {
-                        Console.WriteLine("\n--- " + id + "---\nNome: " + p.Nome + "\nPreço: " + string.Format("{0:F2}", p.Preco) + "€\nDescrição: " + p.Descricao + "\nQuantidade: " + quantidade);
+                        Console.WriteLine(" - "+ p.Nome + " (preço: " + string.Format("{0:F2}", p.Preco) + "€) " + quantidade + "x");
                         } 
                         else {
                             Console.WriteLine("Produto não encontrado.");
@@ -1026,9 +1082,10 @@ namespace ui {
 
                 if (produtos.Count() > 0) {
                     
+                    Console.WriteLine("Produtos:");
                     foreach (Produto p in produtos) {
                         //Mostrar os produtos numerados
-                        Console.WriteLine("\n" + p.Id + " - " + p.Nome + "Preço: " + p.Preco);
+                        Console.WriteLine(" - " + p.Id + " (" + p.Nome + " - " + string.Format("{0:F2}", p.Preco) + "€)");
                     }
 
                     Console.WriteLine("Insira o id do produto: ");
@@ -1064,7 +1121,7 @@ namespace ui {
                     foreach (var (id, quantidade) in produtos) {
                         Produto? p = Model.ObterTarte(id);
                         if (p != null) {
-                            Console.WriteLine("\n" + id + " - " + p.Nome + "(Quantidade: " + quantidade + ")");
+                            Console.WriteLine(" - " + id + " - " + p.Nome + " (Quantidade: " + quantidade + "x)");
                         }
                     }
 
@@ -1094,9 +1151,12 @@ namespace ui {
 
             if (email != null) {
                 if (Model.ConseguePagarEncomenda(email)) {
-                    Model.PagarEncomenda(email);
+                    if (Model.PagarEncomenda(email))
+                        Console.WriteLine("Encomenda foi paga com sucesso");
+                    else
+                        Console.WriteLine("Não é possivel concluir o pagamento");
                 } else {
-                    Console.WriteLine("Não é possível concluir a sua encomenda.");
+                    Console.WriteLine("Não é possível efetuar a sua encomenda.");
                 }
 
             } else {
@@ -1108,6 +1168,7 @@ namespace ui {
 
         private void PedirNotificacaoDeStock() {
             Console.WriteLine("Opção não implementada.");
+            MenuCliente();
         }
 
         private void VerFavoritos() {
@@ -1119,10 +1180,11 @@ namespace ui {
 
                 if (produtos.Count() > 0) {
                     
+                    Console.WriteLine("Favoritos:");
                     foreach (var id in produtos) {
                         Produto? p = Model.ObterTarte(id);
                         if(p != null) {
-                        Console.WriteLine("\n--- " + id + "---\nNome: " + p.Nome + "\nPreço: " + string.Format("{0:F2}", p.Preco) + "€\nDescrição: " + p.Descricao);
+                            Console.WriteLine(" - "+ p.Nome + "  - preço: " + string.Format("{0:F2}", p.Preco) + "€");
                         } 
                         else {
                             Console.WriteLine("Produto não encontrado.");
@@ -1154,7 +1216,7 @@ namespace ui {
                     
                     foreach (Produto p in produtos) {
                         //Mostrar os produtos numerados
-                        Console.WriteLine("\n" + p.Id + " - " + p.Nome + "Preço: " + p.Preco);
+                        Console.WriteLine(" - " + p.Id + " (" + p.Nome + " - " + string.Format("{0:F2}", p.Preco) + "€)");
                     }
 
                     Console.WriteLine("Insira o id do produto: ");
@@ -1190,7 +1252,7 @@ namespace ui {
                     foreach (var id in produtos) {
                         Produto? p = Model.ObterTarte(id);
                         if (p != null) {
-                            Console.WriteLine("\n" + id + " - " + p.Nome);
+                            Console.WriteLine(" - " + p.Id + " (" + p.Nome + " - " + string.Format("{0:F2}", p.Preco) + "€)");
                         }
                     }
 
@@ -1225,9 +1287,29 @@ namespace ui {
                     Console.WriteLine("As suas encomendas:");
 
                     foreach(Encomenda e in encomendas) {
-                        Console.WriteLine("\nID" + e.ID);
-                        Console.WriteLine("Cliente:" + e.Cliente);
-                        Console.WriteLine("Estado:" + e.Estado);
+                        Console.WriteLine("\nID: " + e.ID);
+                        Console.WriteLine("Cliente: " + e.Cliente);
+
+                        switch (e.Estado) {
+
+                            case EncomendaEstado.DOING:
+                                Console.WriteLine("Estado: Em Preparação");
+                            break;
+
+                            case EncomendaEstado.DONE:
+                                Console.WriteLine("Estado: Feito");
+                            break;
+
+                            case EncomendaEstado.QUEUE:
+                                Console.WriteLine("Estado: Em espera");
+                            break;
+
+                            case EncomendaEstado.INTERRUPTED:
+                                Console.WriteLine("Estado: Interrompido");
+                            break;
+
+                        }
+
                         Console.WriteLine("Produtos:");
                         foreach (EncomendaUnidade p in e.VerProdutos()) {
                             Console.WriteLine(" - Produto: " + p.Produto.Nome);
@@ -1320,7 +1402,7 @@ namespace ui {
                                 }
                                 else {
 
-                                    if (u.Iniciado && u.ProcedimentoAtual is not null) {
+                                    if (u.Iniciado) {
                                         Console.Write(" (EM PRODUÇÃO) : " + u.ProcedimentoAtual + "\n");
                                     }
                                     else {
@@ -1362,19 +1444,20 @@ namespace ui {
             MenuCliente();
         }
 
-        /*
         private void VerDadosPessoais() {
             string? email = Model.GetEmailLogin();
             
             if (email != null) {
                 
-                Cliente cliente = Model.GetCliente(email);
-                if (cliente != null) {
-                    Console.WriteLine("Dados Pessoais:");
+                Utilizador? cliente = Model.GetUtilizador(email);
+                if (cliente is not null) {
+                    Console.WriteLine("\nDados Pessoais:");
                     Console.WriteLine("Nome: " + cliente.Nome);
                     Console.WriteLine("Email: " + cliente.Email);
-                    Console.WriteLine("Telefone: " + cliente.Telemovel);
-                    Console.WriteLine("Morada: " + cliente.Morada);
+                    if (cliente.Telemovel is not null)
+                        Console.WriteLine("Telefone: " + cliente.Telemovel);
+                    if (cliente.Morada is not null)
+                        Console.WriteLine("Morada: " + cliente.Morada);
                 } else {
                     Console.WriteLine("Cliente não encontrado.");
                 }
@@ -1385,7 +1468,7 @@ namespace ui {
             Console.WriteLine("\nPressione qualquer tecla para voltar ao menu");
             Console.ReadKey();
             MenuCliente();
-        } */
+        }
 
         private void ModificarDadosPessoais() {
             string? email = Model.GetEmailLogin();
@@ -1407,6 +1490,7 @@ namespace ui {
                             string? novoNome = Console.ReadLine();
                             if (novoNome != null) {
                                 Model.ModifyClienteNome(email, novoNome);
+                                Console.WriteLine("Nome foi alterado");
                             } else {
                                 Console.WriteLine("Nome inválido.");
                             }
@@ -1416,7 +1500,10 @@ namespace ui {
                             Console.WriteLine("Digite o novo email:");
                             string? novoEmail = Console.ReadLine();
                             if(novoEmail != null) {
-                                Model.ModifyClienteEmail(email, novoEmail);
+                                if(Model.ModifyClienteEmail(email, novoEmail))
+                                    Console.WriteLine("Email foi alterado");
+                                else
+                                    Console.WriteLine("Email não foi alterado");
                             } else {
                                 Console.WriteLine("Email inválido.");
                             }
@@ -1427,6 +1514,7 @@ namespace ui {
                             string? novoTelemovel = Console.ReadLine();
                             if (novoTelemovel != null) {
                                 Model.ModifyClienteTelefone(email, novoTelemovel);
+                                Console.WriteLine("Telemóvel foi alterado");
                             } else {
                                 Console.WriteLine("Telemóvel inválido.");
                             }
@@ -1437,6 +1525,7 @@ namespace ui {
                             string? novaMorada = Console.ReadLine();
                             if(novaMorada != null) {
                                 Model.ModifyClienteMorada(email, novaMorada);
+                                Console.WriteLine("Morada foi alterada");
                             } else {
                                 Console.WriteLine("Morada inválida.");
                             }
@@ -1458,11 +1547,14 @@ namespace ui {
             ISet<Avaliacao> avaliacoes = Model.GetAvaliacoes();
 
             if (avaliacoes.Count() > 0) {
+
+                Console.WriteLine("Avaliações:");
                 foreach (Avaliacao a in avaliacoes) {
                     Console.WriteLine("\n--------------------------");
                     Console.WriteLine("Autor: " + a.Autor);
                     Console.WriteLine("Rating: " + a.Rating);
-                    Console.WriteLine("Comentário: " + a.Comentario);
+                    if (a.Comentario is not null)
+                        Console.WriteLine("Comentário: " + a.Comentario);
                 }
 
                 Console.WriteLine("\nPressione qualquer tecla para sair");
@@ -1498,234 +1590,7 @@ namespace ui {
 
             MenuCliente();
         }
-    
 
-
-        /**
-         * Estado - Gestão de Turmas
-         
-        private void gestaoDeTurmas() {
-            Menu menu = new Menu("Gestão de Turmas", new string[]{
-                    "Adicionar Turma",
-                    "Mudar Sala à Turma",
-                    "Listar Turmas"
-            });
-
-            // Registar os handlers - utilizando referências para métodos em vez de expressões lamdas
-            menu.setHandler(1, adicionarTurma);
-            menu.setHandler(2, mudarSalaDeTurma);
-            menu.setHandler(3, listarTurmas);
-
-            menu.run();
-        }
-
-        /**
-         *  Estado - Adicionar Aluno
-         
-        private void adicionarAluno() {
-            try {
-                Console.WriteLine("Número da novo aluno: ");
-                string? num = Console.ReadLine();
-                if (num != null && !this.model.existeAluno(num)) {
-                    Console.WriteLine("Nome da novo aluno: ");
-                    string? nome = Console.ReadLine();
-                    Console.WriteLine("Email da novo aluno: ");
-                    string? email = Console.ReadLine();
-                    if (nome != null && email != null && num != null) {
-                        this.model.adicionaAluno(new Aluno(num, nome, email));
-                        Console.WriteLine("Aluno adicionado");
-                    }
-                } else {
-                    Console.WriteLine("Esse número de aluno já existe!");
-                }
-            }
-            catch (Exception e) {
-                Console.WriteLine(e.Message);
-            }
-        }
-
-        /**
-         *  Estado - Consultar Aluno
-         
-        private void consultarAluno() {
-            try {
-                Console.WriteLine("Número a consultar: ");
-                string? num = Console.ReadLine();
-                if (num != null && this.model.existeAluno(num)) {
-                    Console.WriteLine(this.model.procuraAluno(num).ToString());
-                } else {
-                    Console.WriteLine("Esse número de aluno não existe!");
-                }
-            }
-            catch (Exception e) {
-                Console.WriteLine(e.Message);
-            }
-        }
-
-        /**
-         *  Estado - Listar Alunos
-         
-        private void listarAlunos() {
-            try {
-
-                Console.WriteLine("\nAlunos:");
-                foreach (Aluno a in model.getAlunos())
-                    Console.WriteLine(a.ToString());
-            }
-            catch (Exception e) {
-                Console.WriteLine(e.Message);
-            }
-        }
-
-        /**
-         *  Estado - Adicionar Turma
-         
-        private void adicionarTurma() {
-            try {
-                Console.WriteLine("Número da turma: ");
-                string? tid = Console.ReadLine();
-                if (tid!=null && !this.model.existeTurma(tid)) {
-                    Console.WriteLine("Sala: ");
-                    string? sala = Console.ReadLine();
-                    Console.WriteLine("Edifício: ");
-                    string? edif = Console.ReadLine();
-                    Console.WriteLine("Capacidade: ");
-                    string? capS = Console.ReadLine();
-                    if (sala is not null && edif is not null && capS is not null) {
-                        int cap = int.Parse(capS);
-                        this.model.adicionaTurma(new Turma(tid, new Sala(sala, edif, cap)));
-                        Console.WriteLine("Turma adicionada");
-                    }
-                } else {
-                    Console.WriteLine("Esse número de turma já existe!");
-                }
-            } catch (Exception e) {
-                Console.WriteLine(e.Message);
-            }
-        }
-
-        /**
-         *  Estado - Mudar Sala de Turma
-         
-        private void mudarSalaDeTurma() {
-            try {
-                Console.WriteLine("Número da turma: ");
-                string ?tid = Console.ReadLine();
-                if (tid!= null && this.model.existeTurma(tid)) {
-                    Console.WriteLine("Sala: ");
-                    string? sala = Console.ReadLine();
-                    Console.WriteLine("Edifício: ");
-                    string? edif = Console.ReadLine();
-                    Console.WriteLine("Capacidade: ");
-                    string? capS = Console.ReadLine();
-                    if (sala is not null && edif is not null && capS is not null) {
-                        int cap = int.Parse(capS); // Limpar o buffer depois de ler o inteiro
-                        this.model.alteraSalaDeTurma(tid, new Sala(sala, edif, cap));
-                        Console.WriteLine("Sala da turma alterada");
-                    }
-                } else {
-                    Console.WriteLine("Esse número de turma não existe!");
-                }
-            } catch (Exception e) {
-                Console.WriteLine(e.Message);
-            }
-        }
-
-        /**
-         *  Estado - Listar Turmas
-         
-        private void listarTurmas() {
-            try {
-
-                Console.WriteLine("\nTurmas:");
-                foreach (Turma t in model.getTurmas())
-                    Console.WriteLine(t.ToString());
-
-            }
-            catch (Exception e) {
-                Console.WriteLine(e.Message);
-            }
-        }
-
-        /**
-         *  Estado - Adicionar Aluno a Turma
-         
-        private void adicionarAlunoATurma() {
-            try {
-                Console.WriteLine("Número da turma: ");
-                string? tid = Console.ReadLine();
-                if (tid != null && this.model.existeTurma(tid)) {
-                    Console.WriteLine("Número do aluno: ");
-                    string? num = Console.ReadLine();
-                    if (num is not null && this.model.existeAluno(num)) {
-                        this.model.adicionaAlunoTurma(tid, num);
-                        Console.WriteLine("Aluno adicionado à turma");
-                    } else {
-                        Console.WriteLine("Esse número de aluno não existe!");
-                    }
-                } else {
-                    Console.WriteLine("Esse número de turma não existe!");
-                }
-            }
-            catch (Exception e) {
-                Console.WriteLine(e.Message);
-            }
-        }
-
-        /**
-         *  Estado - Remover Aluno de Turma
-         *
-         *  Exemplo de menu dinâmico
-         
-        private void removerAlunoDeTurma() {
-            try {
-                Console.WriteLine("Número da turma: ");
-                string? tid = Console.ReadLine();
-                if (tid is not null && this.model.existeTurma(tid)) {
-                    // Obter os alunos
-                    List<Aluno> ca = this.model.getAlunos(tid).ToList();
-                    List<string> lalunos = ca.Select(a => $"{a.Numero}-{a.Nome}").ToList();
-                    // Construit o menu de alunos
-                    Menu menu = new Menu("Aluno a remover...", lalunos);
-
-                    // As opções do menu começam em 1, ms as lisats em 0!!1
-                    for(int i=1; i<= lalunos.Count; i++) {
-                        int idx = i;
-                        menu.setHandler(i, ()=>{
-                            this.model.removeAlunoTurma(tid, ca[idx-1].Numero);
-                            menu.setPreCondition(idx, ()=>false);   // 'remover' aluno do menu
-                        });
-                    }
-                    menu.run();
-                } else {
-                    Console.WriteLine("Esse número de turma não existe!");
-                }
-            }
-            catch (Exception e) {
-                Console.WriteLine(e.Message);
-            }
-        }
-
-        /**
-         *  Estado - Listar Alunos da Turma
-         
-        private void listarAlunosDaTurma() {
-            try {
-                Console.WriteLine("Número da turma: ");
-                string? tid = Console.ReadLine();
-
-                if (tid is not null) {
-                    foreach (Aluno a in model.getAlunos(tid)) {
-                        Console.WriteLine(a.ToString());
-                    }
-                }
-
-                //Console.WriteLine(this.model.getAlunos(tid).ToString());
-            }
-            catch (Exception e) {
-                Console.WriteLine(e.Message);
-            }
-        }*/
     }
 
 }

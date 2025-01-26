@@ -124,7 +124,7 @@ namespace business {
 
         public bool ModifyClienteEmail(string email, string novo_email) {
 
-            if (_utilizadores.ContainsKey(email))
+            if (_utilizadores.ContainsKey(novo_email))
                 return false;
 
             _utilizadores[novo_email] = _utilizadores[email];
@@ -141,6 +141,32 @@ namespace business {
 
         public void ModifyClienteTelefone(string email, string telefone) {
             _utilizadores[email].Telemovel = telefone;
+        }
+
+        public Utilizador? GetUtilizador(string email) {
+
+            if (_utilizadores.ContainsKey(email)) {
+                Utilizador u = _utilizadores[email];
+                if (u is Cliente)
+                    return ((Cliente) u).Clone();
+                if (u is Funcionario)
+                    return ((Funcionario) u).Clone();
+            }
+                
+            return null;
+
+        }
+
+        public void EsvaziaCarrinhoCompras(string email) {
+
+            if (_utilizadores.ContainsKey(email)) {
+
+                Utilizador u = _utilizadores[email];
+                if (u is Cliente c)
+                    c.EsvaziarCarrinhoCompras();
+
+            }
+
         }
 
     }

@@ -116,6 +116,10 @@ namespace business {
             
         }
 
+        public void IniciarProduto(int index) {
+            _produtos[index].Iniciar();
+        }
+
         public Encomenda Clone() {
 
             Encomenda e = new Encomenda(this.ID,this.Cliente);

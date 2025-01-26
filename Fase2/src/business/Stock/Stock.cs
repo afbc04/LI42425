@@ -94,7 +94,7 @@ namespace business {
 
             foreach (Material m in materiais) {
 
-                if (m.Quantidade > _materiais[m.Tipo].Quantidade)
+                if (m.Quantidade > _materiais[m.Tipo.ToUpperInvariant()].Quantidade)
                     return false;
 
             }

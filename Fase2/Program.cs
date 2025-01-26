@@ -85,8 +85,8 @@ namespace CantinhoDasEncomendas
                 model.AddMaterialStock("Açucar",600);
                 model.SetMaterialQuantidade("Açucar",567);
 
-                model.AddMaterialStock("Rosas",30);
-                model.SetMaterialQuantidade("Rosas",4);
+                model.AddMaterialStock("Limao",30);
+                model.SetMaterialQuantidade("Limao",4);
 
                 model.AddMaterialStock("Mirtilo",30);
                 model.SetMaterialQuantidade("Mirtilo",23);
@@ -97,8 +97,8 @@ namespace CantinhoDasEncomendas
                 model.AddMaterialStock("Chocolate",40);
                 model.SetMaterialQuantidade("Chocolate",29);
 
-                model.AddMaterialStock("Mandala",30);
-                model.SetMaterialQuantidade("Mandala",9);
+                model.AddMaterialStock("Folha",30);
+                model.SetMaterialQuantidade("Folha",9);
 
                 //Adicionar Produtos
                 IList<string> procedimentos = new List<string>();
@@ -116,23 +116,23 @@ namespace CantinhoDasEncomendas
                     materiais.Add(new Material("Maçã",1));
                     model.AddTarte("maca", "Tarte de Maçã", 8.00f, "images/tarte_maca.png", "Uma deliciosa tarte de maçã com um toque de canela e crocância que faz recordar o Outono, a estação favorita da criadora destas receitas maravilhosas. Cada fatia é um abraço de conforto. É o ideal para acompanhar uma chávena de chá num dia frio.", materiais, procedimentos);
 
-                    //Rosas
+                    //Limão
                     procedimentos.Clear();
                     procedimentos.Add("Adicionar ovos");
                     procedimentos.Add("Misturar Farinha");
-                    procedimentos.Add("Adicionar Rosa");
+                    procedimentos.Add("Adicionar Limão");
 
                     materiais.Clear();
                     materiais.Add(new Material("Ovo",4));
                     materiais.Add(new Material("Farinha",400));
-                    materiais.Add(new Material("Rosas",3));
-                    model.AddTarte("rosas", "Tarte Limão", 7.00f, "images/tarte_rosas.png", "Uma refrescante tarte de limão. Em baixo do topo macio em formato de rosas, encontra-se um recheio suave e cremoso. É a sobremesa ideal para destacar numa mesa.", materiais, procedimentos);
+                    materiais.Add(new Material("Limão",3));
+                    model.AddTarte("limao", "Tarte Limão", 7.00f, "images/tarte_rosas.png", "Uma refrescante tarte de limão. Em baixo do topo macio em formato de rosas, encontra-se um recheio suave e cremoso. É a sobremesa ideal para destacar numa mesa.", materiais, procedimentos);
 
                     //Mirtilo
                     procedimentos.Clear();
                     procedimentos.Add("Adicionar ovos");
                     procedimentos.Add("Misturar Farinha");
-                    procedimentos.Add("Adicionar maçã");
+                    procedimentos.Add("Adicionar mirtilos");
 
                     materiais.Clear();
                     materiais.Add(new Material("Ovo",2));
@@ -167,15 +167,15 @@ namespace CantinhoDasEncomendas
                     materiais.Add(new Material("Chocolate",50));
                     model.AddTarte("chocolate", "Tarte de Chocolate", 9.00f, "images/tarte_chocolate.png", "A tarte de chocolate é sempre um prazer irresistível. O suave e cremoso creme de chocolate enriquecido com uma pitada de flor de sal é a combinação perfeita para ficar rendido a esta tarte. Os frutos secos completam estes sabores, ao trazerem toques de crocância.", materiais, procedimentos);
 
-                    //Mandala
+                    //Folha
                     procedimentos.Clear();
                     procedimentos.Add("Adicionar leite");
-                    procedimentos.Add("Adicionar mandala");
+                    procedimentos.Add("Adicionar folhas");
 
                     materiais.Clear();
                     materiais.Add(new Material("Leite",300));
-                    materiais.Add(new Material("Mandala",1));
-                    model.AddTarte("mandala", "Tarte Folhas", 8.00f, "images/tarte_mandala.png", "Uma bonita e saborosa tarte com uns bordados em forma de folha. A perfeita combinação de sabores no recheio e o bonito desenho no topo fazem desta tarte única e especial.", materiais, procedimentos);
+                    materiais.Add(new Material("Folha",1));
+                    model.AddTarte("folhas", "Tarte Folhas", 8.00f, "images/tarte_mandala.png", "Uma bonita e saborosa tarte com uns bordados em forma de folha. A perfeita combinação de sabores no recheio e o bonito desenho no topo fazem desta tarte única e especial.", materiais, procedimentos);
                 
                 //FAQ
                 model.AddFAQ("Como faço para criar uma conta?","Para criar uma conta, clique em \"Área Pessoal\" no menu e depois selecione \"Criar Conta\". Preencha os dados solicitados e finalize o seu registo.");
@@ -194,13 +194,13 @@ namespace CantinhoDasEncomendas
                     model.AddAvaliacao("p1@gmail.com",2,"Mau Serviço");
 
                     model.AddProdutoFavoritos("p1@gmail.com","chocolate");
-                    model.AddProdutoCarrinhoCompras("p1@gmail.com","mandala");
+                    model.AddProdutoCarrinhoCompras("p1@gmail.com","folhas");
 
                     //Pessoa 2
                     model.AddAvaliacao("p2@gmail.com",4,null);
-                    model.AddProdutoCarrinhoCompras("p1@gmail.com","mandala");
+                    model.AddProdutoCarrinhoCompras("p1@gmail.com","folhas");
                     model.AddProdutoCarrinhoCompras("p1@gmail.com","chocolate");
-                    model.AddProdutoCarrinhoCompras("p1@gmail.com","mandala");
+                    model.AddProdutoCarrinhoCompras("p1@gmail.com","folhas");
                     model.AddProdutoCarrinhoCompras("p1@gmail.com","maca");
 
 
@@ -214,6 +214,12 @@ namespace CantinhoDasEncomendas
                 new TextUI(PovoarFacade()).Run();
             }
             catch (Exception e) {
+                Console.WriteLine($"StackTrace: {e.StackTrace}");
+                if (e.InnerException != null)
+                {
+                    Console.WriteLine($"InnerException: {e.InnerException.Message}");
+                }
+                Console.WriteLine($"Tipo da Exceção: {e.GetType()}");
                 Console.WriteLine($"Erro fatal: {e.Message} [{e.ToString}]");
             }
         }

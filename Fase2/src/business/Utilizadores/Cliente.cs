@@ -84,6 +84,10 @@ namespace business {
             return Encomendas;
         }
 
+        public void EsvaziarCarrinhoCompras() {
+            this.CarrinhoCompras = new CarrinhoCompras();
+        }
+
         public Cliente Clone() {
             Cliente c = new Cliente(Nome,Senha,Email,Telemovel,Morada);
             c.ListaDeFavoritos = _favs;

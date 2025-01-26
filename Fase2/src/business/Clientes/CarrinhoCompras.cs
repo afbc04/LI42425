@@ -60,7 +60,7 @@ namespace business {
         
             int quantidade = _produtos[p];
 
-            if (quantidade <= 0)
+            if (quantidade <= 1)
                 _produtos.Remove(p);
             else
                 _produtos[p]--;

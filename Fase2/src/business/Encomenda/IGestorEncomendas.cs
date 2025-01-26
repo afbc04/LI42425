@@ -14,7 +14,7 @@ namespace business {
         public void IniciarEncomendaProduto(int encomenda,int produto);
         public void AtualizarEstadoEncomenda(int encomenda);
         public void AtualizarProgressoEncomenda(int encomenda, int produto);
-        public void AddEncomendaCarrinhoCompras(string cliente, CarrinhoCompras carrinhoCompras, IDictionary<string,Produto> produtos);
+        public int AddEncomendaCarrinhoCompras(string cliente, CarrinhoCompras carrinhoCompras, IDictionary<string,Produto> produtos);
 
         public bool ProducaoInterrompida();
 
