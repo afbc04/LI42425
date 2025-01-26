@@ -128,7 +128,7 @@ namespace CantinhoDasEncomendas
                     materiais.Add(new Material("Ovo",4));
                     materiais.Add(new Material("Farinha",400));
                     materiais.Add(new Material("Rosas",3));
-                    model.AddTarte("rosas", "Tarte Rosas", 7.00f, "images/tarte_rosas.png", "Uma refrescante tarte de limão. Em baixo do topo macio em formato de rosas, encontra-se um recheio suave e cremoso. É a sobremesa ideal para destacar numa mesa.", materiais, procedimentos);
+                    model.AddTarte("rosas", "Tarte Limão", 7.00f, "images/tarte_rosas.png", "Uma refrescante tarte de limão. Em baixo do topo macio em formato de rosas, encontra-se um recheio suave e cremoso. É a sobremesa ideal para destacar numa mesa.", materiais, procedimentos);
 
                     //Mirtilo
                     procedimentos.Clear();
