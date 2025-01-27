@@ -45,11 +45,11 @@
                 }
 
 .logo-item {
-    margin-right: auto; /* Alinha o logo à esquerda */
+    margin-right: auto;
 }
 
 .logo-img {
-    height: 64px; /* Mesma altura do menu */
+    height: 64px;
     width: auto; /* Mantém a proporção da imagem */
     display: block;
 }

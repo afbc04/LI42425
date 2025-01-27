@@ -1,6 +1,4 @@
-﻿
-/* Container dos botões */
-.botao-container {
+﻿.botao-container {
     display: flex;
     flex-direction: column; /* Organiza os botões em coluna */
     align-items: center; /* Centraliza os botões horizontalmente */
@@ -45,8 +43,8 @@
     margin: 0 auto 10px auto;
     border: 1px solid #000; /* Adiciona uma borda preta */
     display: flex;
-    justify-content: center; /* Alinha horizontalmente o conteúdo */
-    align-items: center; /* Alinha verticalmente o conteúdo */
+    justify-content: center;
+    align-items: center;
     font-size: 18px;
     font-weight: bold;
 }
