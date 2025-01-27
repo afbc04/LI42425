@@ -17,7 +17,7 @@
     border: 1px solid #000; /* Adiciona uma borda preta */
     display: flex;
     justify-content: center; /* Alinha horizontalmente o conteúdo */
-    align-items: center; /* Alinha verticalmente o conteúdo */
+    align-items: center;
     font-size: 18px;
     font-weight: bold;
 }

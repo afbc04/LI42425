@@ -9,16 +9,16 @@
 }
 
     .tarte-detalhes h1 {
-        font-family: 'Dancing Script', cursive; /* Letra elegante */
-        font-size: 20px; /* Tamanho grande */
-        color: #D97971; /* Cor de destaque */
+        font-family: 'Dancing Script', cursive;
+        font-size: 20px;
+        color: #D97971;
         margin-bottom: 20px;
         text-align: center;
     }
 
     .tarte-detalhes img {
         display: block;
-        margin: 0 auto 20px; /* Espaço em volta */
+        margin: 0 auto 20px;
         height: 150px;
         border-radius: 10px; /* Borda arredondada */
     }
