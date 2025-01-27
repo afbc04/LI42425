@@ -1,4 +1,9 @@
 ﻿@page "/login"
+@inherits LayoutComponentBase
+@inject business.IFacade Facade
+@inject NavigationManager NavigationManager
+@layout Layout.MainLayout
+@inject ILogger<Login> Logger
 
 @*
 <div>
@@ -17,7 +22,7 @@ private async Task Submit()
     Console.WriteLine("Botão carregado");
 
     // Simula um atraso para garantir que o Console.WriteLine seja executado.
-    await Task.Delay(500); 
+    await Task.Delay(500);
 
     Console.WriteLine($"Email: {Email}, Password: {Password}");
 }
@@ -98,3 +103,35 @@ private async Task Submit()
     <p>Ainda não tem conta? <a href="/registo">Fazer Registo</a></p>
     <p>Esqueceu a sua Password? <a href="/recuperarsenha">Clique Aqui</a></p>
 </div>
+
+@code {
+
+    private string Email { get; set; } = string.Empty;
+    private string Password { get; set; } = string.Empty;
+
+    private void HandleSubmit()
+    {
+        // Validar o login
+        var loginSucesso = Facade.IniciarSessao(Email, Password);
+
+        if (loginSucesso)
+        {
+            Logger.LogInformation($"Login bem-sucedido para o usuário: {Email}");
+            // Redirecionar para a página de menu principal
+            NavigationManager.NavigateTo("/");
+
+        }
+        else
+        {
+            Logger.LogWarning($"Tentativa de login falhou para o usuário: {Email}");
+            // Mostrar mensagem de erro ao usuário
+            ShowErrorMessage();
+        }
+    }
+
+    private void ShowErrorMessage()
+    {
+        // Exibe uma mensagem de erro ao usuário (implemente conforme sua preferência, como um modal ou texto na página)
+        Logger.LogError("E-mail ou senha incorretos.");
+    }
+}
