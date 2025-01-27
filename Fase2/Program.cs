@@ -23,8 +23,6 @@ namespace CantinhoDasEncomendas
             // Registrar CarrinhoCompras como Singleton para manter a mesma instância em toda a aplicação
             builder.Services.AddSingleton<CarrinhoCompras>();
 
-            //� singleton porque deve ser unico para toda a aplica��o de modo a evitar inconsist�ncia de dados
-            // Registra o GestorProdutos como um servi�o Singleton
             builder.Services.AddSingleton<IFacade, Facade>(sp => PovoarFacade());
 
             //builder.Services.AddSingleton(sp => new EmailService(

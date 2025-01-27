@@ -25,7 +25,7 @@
 
 .tartes-detalhes p {
     font-family: 'Arial', sans-serif;
-    font-size: 1rem;
+    font-size: 16px;
     color: #555; /* Texto cinzento */
     line-height: 1.6; /* Boa legibilidade */
     text-align: left;
@@ -34,9 +34,9 @@
 
 .tarte-detalhes .preco {
     font-family: 'Arial', sans-serif;
-    font-size: 1rem; /* Tamanho maior para o preço */
+    font-size: 16px;
     color: #555; /* Cor do preço */
-    text-align: center; /* Alinha o preço à direita */
+    text-align: center;
     margin-top: 5px; /*Espaço superior para o preço */
 }
 

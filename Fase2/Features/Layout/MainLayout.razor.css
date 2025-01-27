@@ -6,8 +6,7 @@
     z-index: 1000; /* Garante que o menu fique acima de outros elementos */
     top: 0; /* posiciona o menu no topo*/
     display: flex;
-    justify-content: space-between; /* Alinha o logo à esquerda e links à direita */
-    align-items: center; /* Alinha os itens do menu verticalmente */
+    justify-content: space-between; /* Assegura o alinhamento e distribui corretamente o espaço */
 }
 
     .menu-h ul {
@@ -38,7 +37,7 @@
 }
 
 .logo-img {
-    height: 64px; /* Mesma altura do menu */
+    height: 64px;
     width: auto; /* Mantém a proporção da imagem */
     display: block;
 }

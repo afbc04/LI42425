@@ -17,12 +17,6 @@
     @* Gera os links dinamicamente a partir do Facade *@
     @foreach (var tarte in Facade.ObterTartes())
     {
-        /*o Blazor não permite combinar C# e HTML diretamente
-        dentro do atributo de um componente (como href)
-        href="/tarte/@tarte.Id", o Blazor interpreta como "conteúdo misto"
-        o href espera receber uma unica expressão C# ou uma string
-        ao usar @() transforma em uma unica string e o blazor consegue processar
-        */
         <NavLink class="tarte" href=@($"/tarte/{tarte.Id}") tabindex="0">
             @tarte.Nome
             <img src="@tarte.Imagem" alt="@tarte.Nome" />
