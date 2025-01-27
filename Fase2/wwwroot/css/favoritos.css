@@ -1,0 +1,64 @@
+﻿.titulo {
+    font-family: 'Dancing Script', cursive;
+    font-size: 36px;
+    font-weight: bold;
+    color: #D97971;
+    margin: 40px auto 20px;
+    text-align: center;
+}
+
+.subtitulo {
+    font-family: 'Dancing Script', cursive;
+    font-size: 25px;
+    font-weight: bold;
+    color: rgba(217, 121, 113, 0.6);
+    margin: 30px auto 40px;
+    text-align: center;
+}
+
+.container-botao {
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    height: 20vh; /* Reduz a altura do contêiner para que o botão fique mais acima */
+}
+
+.container-botao2 {
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    height: 40vh; /* Reduz a altura do contêiner para que o botão fique mais acima */
+}
+
+.botao-login {
+    background-color: #f0f0f0; /* Cinza claro */
+    color: #333; /* Texto escuro */
+    border: 1px solid #ccc; /* Borda cinza */
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    text-decoration: none; /* Remove sublinhado para links */
+    text-align: center;
+    margin-top: -50px; /* Ajuste opcional para elevar mais o botão */
+}
+
+.botao-voltar {
+    background-color: #f0f0f0; /* Cinza claro */
+    color: #333; /* Texto escuro */
+    border: 1px solid #ccc; /* Borda cinza */
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    text-decoration: none; /* Remove sublinhado para links */
+    text-align: center;
+    margin-top: -50px; /* Ajuste opcional para elevar mais o botão */
+}
+
+    .botao-voltar:hover {
+        background-color: #e0e0e0; /* Cinza mais escuro no hover */
+        color: #000; /* Texto um pouco mais escuro no hover */
+    }

@@ -1,0 +1,22 @@
+﻿@page "/favoritos"
+@inject business.IFacade Facade
+@inherits LayoutComponentBase
+@layout Layout.MainLayout
+
+
+<head>
+    <link href="css/favoritos.css" rel="stylesheet" />
+</head>
+
+<div class="favoritos">
+    <h1 class="titulo">Os Meus Favoritos:</h1>
+    @if (!Facade.SessaoIniciada())
+    {
+        <h2 class="subtitulo">É necessário iniciar sessão para acessar os favoritos.</h2>
+        <div class="container-botao">
+            <NavLink href="/login" class="botao-login">Ir para o Login</NavLink>
+        </div>
+
+    }
+</div>
+

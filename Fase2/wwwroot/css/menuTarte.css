@@ -32,7 +32,7 @@
     border: 2px dashed #D97971;
     padding: 20px;
     text-align: center;
-    cursor: pointer; /* Indica que é clicável */
+    cursor: pointer;
     transition: transform 0.3s, box-shadow 0.3s;
     font-size: 15px;
     font-weight: bold;

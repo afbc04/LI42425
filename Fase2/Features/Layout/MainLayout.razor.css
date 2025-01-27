@@ -29,11 +29,11 @@
             }
 
                 .menu-h ul li a:hover {
-                    background-color: #F2D8E6; /* Efeito de fundo quando o cursor passa sobre o link */
+                    background-color: #F2D8E6; /* Efeito de fundo quando o cursor passa por cima do link */
                 }
 
 .logo-item {
-    margin-right: auto; /* Alinha o logo à esquerda */
+    margin-right: auto;
 }
 
 .logo-img {
