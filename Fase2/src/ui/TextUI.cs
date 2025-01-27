@@ -111,8 +111,11 @@ namespace ui {
             menu.SetHandler(16, () => VerEncomendasDone());
 
             menu.SetHandler(18, () => IniciarEncomendaProduto());
+            menu.SetPreCondition(18, () => ProducaoInterrompida == false);
             menu.SetHandler(19, () => AtualizarEstadoEncomenda());
+            menu.SetPreCondition(19, () => ProducaoInterrompida == false);
             menu.SetHandler(20, () => AtualizarProgressoEncomenda());
+            menu.SetPreCondition(20, () => ProducaoInterrompida == false);
 
             menu.SetHandler(22, () => VerFAQ());
             menu.SetHandler(23, () => AdicionarFAQ());
